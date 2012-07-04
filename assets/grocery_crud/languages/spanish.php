@@ -48,3 +48,24 @@
 
 	$lang['insert_error']			= 'Ocurrio un error durante la insercion.';
 	$lang['update_error']			= 'Ocurrio un error guardando.';
+	
+	/* Added in version 1.2.1 */
+	$lang['set_relation_title']		= 'Select {field_display_as}';	
+	$lang['list_record']			= 'Record';
+	$lang['form_inactive']			= 'inactive';
+	$lang['form_active']			= 'active';
+	
+	/* Added in version 1.2.2 */
+	$lang['form_save_and_go_back']	= 'Guardar y volver a la lista';
+	$lang['form_update_and_go_back']= 'Actualizar y volver a la lista';
+
+	/* Upload functionality */
+	$lang['string_delete_file'] 	= "Borrando archivo";
+	$lang['string_progress'] 		= "Progreso: ";
+	$lang['error_on_uploading'] 	= "Ocurrio un error al subir.";
+	$lang['message_prompt_delete_file'] 	= "Esta seguro de que desea borrar el archivo?";
+	
+	$lang['error_max_number_of_files'] 	= "Solo puede subir un archivo a la vez.";
+	$lang['error_accept_file_types'] 	= "No esta permitido subir archivos con esta extension.";
+	$lang['error_max_file_size'] 		= "El archivo subido excede el tamaño maximo permitido: {max_file_size}.";
+	$lang['error_min_file_size'] 		= "No puede subir un archivo vacio.";

@@ -1,9 +1,24 @@
 $(function(){
-	$("#FormLoading").ajaxStart(function(){
-		   $(this).show();
-	});
-	$("#FormLoading").ajaxStop(function(){
-		   $(this).fadeOut('slow');
+	
+	var save_and_close = false;
+	
+	$('.ptogtitle').click(function(){
+		if($(this).hasClass('vsble'))
+		{
+			$(this).removeClass('vsble');
+			$('#main-table-box').slideDown("slow");
+		}
+		else
+		{
+			$(this).addClass('vsble');
+			$('#main-table-box').slideUp("slow");
+		}
+	});	
+	
+	$('#save-and-go-back-button').click(function(){
+		save_and_close = true;
+		
+		$('#crudForm').trigger('submit');
 	});	
 	
 	$('#crudForm').submit(function(){
@@ -11,16 +26,31 @@ $(function(){
 			url: validation_url,
 			dataType: 'json',
 			cache: 'false',
+			beforeSend: function(){
+				$("#FormLoading").show();
+			},
 			success: function(data){
+				$("#FormLoading").hide();
 				if(data.success)
 				{						
 					$('#crudForm').ajaxSubmit({
 						dataType: 'text',
 						cache: 'false',
+						beforeSend: function(){
+							$("#FormLoading").show();
+						},		
 						success: function(result){
+							
+							$("#FormLoading").fadeOut("slow");
 							data = $.parseJSON( result );
 							if(data.success)
 							{	
+								if(save_and_close)
+								{
+									window.location = data.success_list_url;
+									return true;
+								}								
+								
 								$('#report-error').hide().html('');									
 								$('.field_error').each(function(){
 									$(this).removeClass('field_error');
@@ -54,7 +84,12 @@ $(function(){
 					$('#report-success').slideUp('fast').html('');
 					
 				}
-			}
+			},
+			error: function(){
+				alert( message_update_error );
+				$("#FormLoading").hide();
+				
+			}			
 		});
 		return false;
 	});

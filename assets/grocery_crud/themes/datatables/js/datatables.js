@@ -1,8 +1,11 @@
+var default_per_page = typeof default_per_page !== 'undefined' ? default_per_page : 25;
+
 $(document).ready(function() {
 	oTable = $('#groceryCrudTable').dataTable({
 		"bJQueryUI": true,
 		"sPaginationType": "full_numbers",
 		"bStateSave": true,
+		"iDisplayLength": default_per_page,
 		"oLanguage":{
 		    "sProcessing":   list_loading,
 		    "sLengthMenu":   show_entries_string,
@@ -36,7 +39,7 @@ $(document).ready(function() {
 
 function delete_row(delete_url , row_id)
 {	
-	if(confirm('Are you sure that you want to delete this '+subject+'?'))
+	if(confirm(message_alert_delete))
 	{
 		$.ajax({
 			url: delete_url,

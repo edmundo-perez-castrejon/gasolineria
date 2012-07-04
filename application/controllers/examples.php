@@ -6,10 +6,8 @@ class Examples extends CI_Controller {
 	{
 		parent::__construct();
 		
-		/* Standard Libraries */
 		$this->load->database();
 		$this->load->helper('url');
-		/* ------------------ */	
 		
 		$this->load->library('grocery_CRUD');	
 	}
@@ -18,25 +16,7 @@ class Examples extends CI_Controller {
 	{
 		$this->load->view('example.php',$output);	
 	}
-
-    function users()
-    {
-        $crud = new grocery_CRUD();
-
-        $crud->set_table('users');
-        $crud->columns('username','email','active','first_name','last_name','Company','Phone');
-        $crud->display_as('username','Nombre de usuario')
-            ->display_as('email','Correo Electronico')
-            ->display_as('first_name','Nombre')
-            ->display_as('last_name','Apellidos');
-        /*$crud->set_subject('Customer');
-        $crud->set_relation('salesRepEmployeeNumber','employees','{lastName} {firstName}');
-        */
-        $output = $crud->render();
-
-        $this->_example_output($output);
-    }
-
+	
 	function offices()
 	{
 		$output = $this->grocery_crud->render();
@@ -148,7 +128,7 @@ class Examples extends CI_Controller {
 		$crud->set_table('film');
 		$crud->set_relation_n_n('actors', 'film_actor', 'actor', 'film_id', 'actor_id', 'fullname','priority');
 		$crud->set_relation_n_n('category', 'film_category', 'category', 'film_id', 'category_id', 'name');
-		$crud->unset_columns('special_features','description');
+		$crud->unset_columns('special_features','description','actors');
 		
 		$crud->fields('title', 'description', 'actors' ,  'category' ,'release_year', 'rental_duration', 'rental_rate', 'length', 'replacement_cost', 'rating', 'special_features');
 		
