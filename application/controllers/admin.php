@@ -17,27 +17,9 @@ class Admin extends CI_Controller {
             redirect('auth/login', 'refresh');
         }else{
             $this->load->library('session');
-            #$this->load->library('salidas_lib');
-            #$this->load->model(array('contratos_model','clientes_model','buques_model','bodegas_model','destinos_model'));
             $this->load->helper(array('url','form'));
         }
-
-
     }
-
-    /*public function lista_usuarios()
-    {
-        //list the users
-        $this->data['message']=$this->session->flashdata('message');
-        $this->data['users'] = $this->ion_auth->users()->result();
-        foreach ($this->data['users'] as $k => $user)
-        {
-            $this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
-        }
-
-
-        $this->load->view('auth/index', $this->data);
-    }*/
 
     public function grocery_usuarios()
     {
@@ -46,24 +28,19 @@ class Admin extends CI_Controller {
         $crud->where('username!=',"'root'", FALSE);
 
         $crud->set_table('users');
-        $crud->set_relation_n_n('claves','claves_users','claves','id','id_clave','contrato');
 
         $crud->set_theme('datatables');
-        $crud->columns('username','active','first_name','last_name','claves','id_empresa');
 
-        $crud->fields('username','password','email','active','first_name','last_name','claves','id_empresa');
+        $crud->columns('username','active','first_name','last_name');
+
+        $crud->fields('username','password','email','active','first_name','last_name');
 
         $crud->change_field_type('password','password');
 
         $crud->display_as('username','Usuario')
             ->display_as('email','Correo Electronico')
             ->display_as('first_name','Nombre')
-            ->display_as('last_name','Apellidos')
-            ->display_as('id_empresa','Empresa tratante')
-            ->display_as('claves','Contratos');
-
-        #Relacino con la empresa
-        $crud->set_relation('id_empresa','empresas','nombre');
+            ->display_as('last_name','Apellidos');
 
         $output = $crud->render();
         $this->load->view('template/header',$output);
@@ -125,6 +102,5 @@ class Admin extends CI_Controller {
     }
 }
 
-/* 20161408 contraseña casa papas*/
 /* End of file welcome.php */
 /* Location: ./application/controllers/welcome.php */

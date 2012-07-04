@@ -24,21 +24,17 @@ class Auth extends CI_Controller {
 		{
 			//redirect them to the login page
 			redirect('auth/login', 'refresh');
-		}else{
-            redirect('muelles/lista_muelles');
-        }
-		/*elseif (!$this->ion_auth->is_admin())
+		}elseif (!$this->ion_auth->is_admin())
 		{
-
-			redirect('contratos');
+			//redirect('contratos');
+            echo 'NOT ADMIN';
 		}
 		else
 		{
 			//set the flash data error message if there is one
 			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
             redirect('admin/grocery_usuarios');
-
-		}*/
+		}
 	}
 
 

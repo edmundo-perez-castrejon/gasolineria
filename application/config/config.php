@@ -16,7 +16,7 @@
 */
 $config['base_url']	= '';
 
-$config['nombre_sistema'] = 'Control de Buques';
+$config['nombre_sistema'] = 'Control de Saldos';
 
 $config['dev_mode'] = FALSE;
 /*

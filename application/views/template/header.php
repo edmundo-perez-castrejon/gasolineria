@@ -158,17 +158,7 @@
                     if($this->ion_auth->is_admin()):
                         ?>
                         <li>
-                            <?php echo anchor('claves/claves_usuarios','Contratos'); ?>
-                        </li>
-
-                        <li>
                             <?php echo anchor('admin/configuracion','Configuracion'); ?>
-                        </li>
-                        <li>
-                            <?php echo anchor('admin/imagenes_contratos','Imagenes');?>
-                        </li>
-                        <li>
-                            <?php echo anchor('admin/empresas','Empresas');?>
                         </li>
                         <?php
 
@@ -176,7 +166,9 @@
                         {
                             ?>
                             <li>
-                                <?php echo anchor('muelles/admin','Muelles');?>
+                                <?php //echo anchor('muelles/admin','Muelles');
+                                echo anchor('#','Root_Item');
+                                ?>
                             </li>
                             <?php
                         }
