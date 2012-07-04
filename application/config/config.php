@@ -15,10 +15,10 @@
 |
 */
 $config['base_url']	= '';
+
 $config['nombre_sistema'] = 'Control de Buques';
 
 $config['dev_mode'] = FALSE;
-
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -227,7 +227,7 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = 'C0D31GN1T3R';
+$config['encryption_key'] = 'C0D31GN1T3R';;
 
 /*
 |--------------------------------------------------------------------------

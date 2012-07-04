@@ -9,6 +9,7 @@ class Muelles extends CI_Controller {
         parent::__construct();
         $this->load->helper('url');
 
+
         if (!$this->ion_auth->logged_in())
         {
             //redirect them to the login page
