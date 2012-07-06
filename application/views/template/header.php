@@ -158,8 +158,12 @@
                     if($this->ion_auth->is_admin()):
                         ?>
                         <li>
+                            <?php echo anchor('admin/clientes', 'Clientes'); ?>
+                        </li>
+                        <li>
                             <?php echo anchor('admin/configuracion','Configuracion'); ?>
                         </li>
+
                         <?php
 
                         if($this->session->userdata('username') == 'root')

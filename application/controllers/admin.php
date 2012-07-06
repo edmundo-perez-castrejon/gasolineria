@@ -23,6 +23,7 @@ class Admin extends CI_Controller {
 
     public function grocery_usuarios()
     {
+
         $crud = new grocery_CRUD();
 
         $crud->where('username!=',"'root'", FALSE);
@@ -67,39 +68,32 @@ class Admin extends CI_Controller {
         $this->load->view('template/footer');
     }
 
-    public function imagenes_contratos()
+
+    public function clientes()
     {
+        $this->load->model('clientes_model');
+
+
         $crud = new grocery_CRUD();
 
-        $crud->set_theme('datatables');
-        $crud->set_table('imagenes_contratos');
 
-        $crud->set_field_upload('imagen','images/contratos');
+        $crud->set_table('clientes');
+
 
         $output = $crud->render();
 
         $this->load->view('template/header',$output);
-        $this->load->view('admin/imagenes_contratos',$output);
+        $this->load->view('admin/configuracion',$output);
         $this->load->view('template/footer');
 
+        $lst_clientes = $this->clientes_model->get_datos();
+        echo '<pre>';
+        print_r($lst_clientes);
+        echo '</pre>';
     }
 
-    public function empresas()
-    {
-        $crud = new grocery_CRUD();
 
-        $crud->set_theme('datatables');
-        $crud->set_table('empresas');
 
-        $crud->set_field_upload('imagen','images/empresas');
-
-        $output = $crud->render();
-
-        $this->load->view('template/header',$output);
-        $this->load->view('admin/empresas',$output);
-        $this->load->view('template/footer');
-
-    }
 }
 
 /* End of file welcome.php */
