@@ -1,0 +1,17 @@
+.reporte-header {
+    background-color: lightgray;
+    font-weight: bold;
+}
+
+.clave {
+    background-color: lightgray;
+    font-weight: bold;
+}
+
+.font-big{
+    font-size: 18px;
+}
+
+.font-small{
+    font-size: 8px;
+}

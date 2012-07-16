@@ -30,5 +30,6 @@ class Reportes extends CI_Controller {
         $data = array();
         $html = $this->load->view('reportes/under_construction', $data, true);
         pdf_create($html, 'nodisponible'); #pdf_create_landscape
+        #$this->load->view('reportes/under_construction');
     }
 }
