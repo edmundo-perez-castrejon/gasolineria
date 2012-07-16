@@ -15,6 +15,8 @@ Class Clientes_model extends CI_Model
         ;DefaultDir=". realpath("../databases");
 
         $this->db_connection->open($db_connstr);
+
+        $this->load->database();
     }
 
     public function __destruct()
@@ -39,8 +41,11 @@ Class Clientes_model extends CI_Model
         $rs_fld7 = $rs->Fields(11); #CONTACTO
 
         while (!$rs->EOF) {
+
+            $razon_social = ($rs_fld1->value == null) ? "": $rs_fld1->value;
+
             $Array_result[] = array($rs_fld0->name => $rs_fld0->value,
-                                    $rs_fld1->name => $rs_fld1->value,
+                                    $rs_fld1->name => $razon_social,
                                     $rs_fld2->name => $rs_fld2->value,
                                     $rs_fld3->name => $rs_fld3->value,
                                     $rs_fld4->name => $rs_fld4->value,
@@ -53,6 +58,31 @@ Class Clientes_model extends CI_Model
 
         $rs->Close();
         return $Array_result;
+    }
+
+    /** sincroniza los clientes de la base de datos de access con la tabla mysql de clientes */
+    public function sincroniza()
+    {
+        $lst_access  = $this->get_datos();
+
+        #TODO : implementar una sincronia mas inteligente
+        $this->db->query("delete from clientes");
+        foreach($lst_access as $cliente_access)
+        {
+            $datos_insert = array("CLAVE_CLIENTE" => $cliente_access['CLAVE_CLIENTE'],
+                "RAZON_SOCIAL"=>$cliente_access['RAZON_SOCIAL']);
+            $this->nuevo_cliente($datos_insert);
+        }
+    }
+
+    public function nuevo_cliente($data)
+    {
+        if($this->db->insert('clientes', $data))
+        {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
     }
 }
 //end of file Contratos_model

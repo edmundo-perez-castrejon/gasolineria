@@ -30,18 +30,19 @@ class Admin extends CI_Controller {
 
         $crud->set_table('users');
 
-        $crud->set_theme('datatables');
+        #Relacion con la clientes
+        $crud->set_relation('clave_cliente','clientes','razon_social');
 
-        $crud->columns('username','active','first_name','last_name');
+        $crud->columns('username','active','clave_cliente');
 
-        $crud->fields('username','password','email','active','first_name','last_name');
+        $crud->fields('username','password','email','active','clave_cliente');
 
         $crud->change_field_type('password','password');
 
         $crud->display_as('username','Usuario')
             ->display_as('email','Correo Electronico')
-            ->display_as('first_name','Nombre')
-            ->display_as('last_name','Apellidos');
+            ->display_as('clave_cliente','Razon Social');
+
 
         $output = $crud->render();
         $this->load->view('template/header',$output);
@@ -73,23 +74,21 @@ class Admin extends CI_Controller {
     {
         $this->load->model('clientes_model');
 
-
         $crud = new grocery_CRUD();
-
 
         $crud->set_table('clientes');
 
+        $crud->unset_operations();
 
         $output = $crud->render();
 
         $this->load->view('template/header',$output);
-        $this->load->view('admin/configuracion',$output);
+        $this->load->view('admin/clientes',$output);
         $this->load->view('template/footer');
 
         $lst_clientes = $this->clientes_model->get_datos();
-        echo '<pre>';
-        print_r($lst_clientes);
-        echo '</pre>';
+
+        $this->clientes_model->sincroniza();
     }
 
 

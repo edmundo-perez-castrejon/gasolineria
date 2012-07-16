@@ -1,4 +1,4 @@
-<h1>CLINTES</h1>
+<h1>Clientes</h1>
 <div class='mainInfo'>
     <div class="row">
 
