@@ -17,6 +17,7 @@
 
     <!-- Le styles -->
     <link href="<?php echo base_url();?>assets/bootstrap/bootstrap.css" rel="stylesheet">
+    <link href="<?php echo base_url();?>css/gasolineria.css" rel="stylesheet">
 
     <?php
     if(isset($css_files)):
@@ -135,8 +136,7 @@
 
                         $ct = $uri['ct'];
                         $cl = $uri['cl'];
-                    /*    $ct = $this->session->userdata('cve_contrato');
-                        $cl = $this->session->userdata('cve_cliente');*/
+
                     echo anchor('contratos/get_datos/ct/'.$ct.'/cl/'.$cl, $ct,  array('class'=>'brand'));
                 }else{
                     echo anchor('#',$this->config->item('nombre_sistema'),array('class'=>'brand'));

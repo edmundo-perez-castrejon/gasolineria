@@ -26,9 +26,9 @@ class Auth extends CI_Controller {
 			redirect('auth/login', 'refresh');
 		}elseif (!$this->ion_auth->is_admin())
 		{
-			//redirect('contratos');
-            echo 'NOT ADMIN';
-		}
+			redirect('dashboard');
+
+        }
 		else
 		{
 			//set the flash data error message if there is one

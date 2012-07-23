@@ -31,17 +31,17 @@ class Admin extends CI_Controller {
         $crud->set_table('users');
 
         #Relacion con la clientes
-        $crud->set_relation('clave_cliente','clientes','razon_social');
+        $crud->set_relation('cliente_id','clientes','razon_social');
 
-        $crud->columns('username','active','clave_cliente');
+        $crud->columns('username','active','cliente_id');
 
-        $crud->fields('username','password','email','active','clave_cliente');
+        $crud->fields('username','password','email','active','cliente_id');
 
         $crud->change_field_type('password','password');
 
         $crud->display_as('username','Usuario')
             ->display_as('email','Correo Electronico')
-            ->display_as('clave_cliente','Razon Social');
+            ->display_as('cliente_id','Razon Social');
 
 
         $output = $crud->render();
@@ -76,7 +76,7 @@ class Admin extends CI_Controller {
 
         $crud = new grocery_CRUD();
 
-        $crud->set_table('clientes');
+        $crud->set_table('clients');
 
         $crud->unset_operations();
 
