@@ -2,10 +2,12 @@
 class Dashboard extends CI_Controller {
     public function __construct()
     {
+
         parent::__construct();
         $this->load->helper('url');
         $this->load->library('ion_auth');
         $this->load->library('grocery_CRUD');
+
 
         if (!$this->ion_auth->logged_in())
         {
@@ -20,15 +22,15 @@ class Dashboard extends CI_Controller {
     }
 
     function index(){
-
-
-
-
         $this->data['user'] = $this->user;
 
+        $this->benchmark->mark('facturas');
         $lst_facturas = $this->user->cliente->facturas();
+        $this->benchmark->mark('movimientos');
         $lst_movimientos = $this->user->cliente->movimientos_no_facturado();
-        #$this->data['facturas'] = $lst_facturas;
+
+        $this->benchmark->mark('final');
+        $this->data['facturas'] = $lst_facturas;
         $this->data['movimientos'] = $lst_movimientos;
 
         $this->load->view('template/header');

@@ -187,21 +187,5 @@ Class Movimientos_model extends CI_Model
         $rs->Close();
         return $Array_result;
     }
-
-    public function get_balance($numero_factura){
-        $movs = $this->by_factura($numero_factura);
-        $consumo_sum = 0;
-        $abono_sum = 0;
-        foreach($movs as $m){
-            $consumo_sum += $m['CONSUMO'];
-            $abono_sum += $m['ABONO'];
-        }
-
-        if($consumo_sum == $abono_sum)
-            return 0;
-        else
-            return $consumo_sum - $abono_sum;
-
-    }
 }
 //end of file Contratos_model

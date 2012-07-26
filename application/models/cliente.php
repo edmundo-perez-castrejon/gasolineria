@@ -12,11 +12,10 @@ class Cliente extends DataMapper{
     }
 
     public function facturas(){
-        #Todas las facturas
-        #$lst_facturas = $this->CI->facturas_model->get_datos($this->clave_cliente);
-
         #Facturas con balance para eliminar las cuadradas
+
         $lst_facturas = $this->CI->facturas_model->get_datos_with_balance($this->clave_cliente);
+
         return $lst_facturas;
     }
 

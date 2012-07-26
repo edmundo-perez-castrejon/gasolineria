@@ -77,19 +77,14 @@
             $saldo_sum = 0;
             foreach($facturas as $f){
 
-                #Para no pintar las que ya estan cuadradas
-                if($f['BALANCE']<0.1){
-                    continue;
-                }
-
-                $saldo_sum += $f['BALANCE'];
+                $saldo_sum += $f['SALDO'];
 
                 echo '<tr>';
                 echo "<td>".anchor('facturas/detalle_factura/'.$f['FACTURA'], $f['FACTURA'])."</td>";
                 echo "<td>".$f['FECHA']."</td>";
                 echo "<td>".number_format($f['IMPORTE'])."</td>";
                 echo "<td>".$f['VENCIMIENTO']."</td>";
-                echo "<td>".number_format($f['BALANCE'], 2)."</td>";
+                echo "<td>".number_format($f['SALDO'], 2)."</td>";
                 echo '</tr>';
             }
             ?>
