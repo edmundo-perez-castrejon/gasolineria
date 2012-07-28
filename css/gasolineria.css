@@ -15,8 +15,32 @@
 .font-small{
     font-size: 8px;
 }
-
 .saldo{
     color: red;
-    font-size: 20px;
+    font-size: 28px;
+    float: right;
+    display: inline;
+}
+
+.sumatoria{
+    font-weight: bold;
+    font-size: 120%;
+}
+
+#nombre_cliente{
+    font-size: 28px;
+    float: left;
+}
+
+#gran_total{
+    float: right;
+    margin: -3px 11px;
+}
+
+.page-header{
+    height: 20px;
+}
+
+.label{
+    background-color: #1EA272;
 }

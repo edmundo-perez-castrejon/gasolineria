@@ -16,6 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Emulate7" />
 
     <!-- Le styles -->
+
     <link href="<?php echo base_url();?>assets/bootstrap/bootstrap.css" rel="stylesheet">
     <link href="<?php echo base_url();?>css/gasolineria.css" rel="stylesheet">
 
@@ -31,6 +32,7 @@
         ?>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/flexigrid-1.1/css/flexigrid.pack.css" />
         <script type="text/javascript" src="<?php echo base_url();?>assets/jquery/jquery-1.5.2.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url();?>assets/jquery/jquery.formatCurrency-1.4.0.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/flexigrid-1.1/js/flexigrid.pack.js"></script>
         <?php
     endif;
@@ -137,7 +139,7 @@
                         $ct = $uri['ct'];
                         $cl = $uri['cl'];
 
-                    echo anchor('contratos/get_datos/ct/'.$ct.'/cl/'.$cl, $ct,  array('class'=>'brand'));
+                    //echo anchor('contratos/get_datos/ct/'.$ct.'/cl/'.$cl, $ct,  array('class'=>'brand'));
                 }else{
                     echo anchor('#',$this->config->item('nombre_sistema'),array('class'=>'brand'));
                 }
@@ -150,7 +152,7 @@
                     if($this->ion_auth->is_admin()){
                         echo anchor('admin/grocery_usuarios','Usuarios');
                     }else{
-                        echo anchor('contratos','Contratos');
+                      //  echo anchor('contratos','Contratos');
                     }
                     ?>
                 </li>

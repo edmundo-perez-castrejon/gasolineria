@@ -24,14 +24,14 @@ class Dashboard extends CI_Controller {
     function index(){
         $this->data['user'] = $this->user;
 
-        $this->benchmark->mark('facturas');
         $lst_facturas = $this->user->cliente->facturas();
-        $this->benchmark->mark('movimientos');
         $lst_movimientos = $this->user->cliente->movimientos_no_facturado();
 
-        $this->benchmark->mark('final');
         $this->data['facturas'] = $lst_facturas;
         $this->data['movimientos'] = $lst_movimientos;
+
+        $this->data['partial_movimientos_pendientes'] = $this->load->view('dashboard/movimientos_pendientes', $this->data, true);
+        $this->data['partial_facturas_pendientes'] = $this->load->view('dashboard/facturas_pendientes', $this->data, true);
 
         $this->load->view('template/header');
         $this->load->view('dashboard/dashboard', $this->data);
