@@ -16,7 +16,7 @@
     $importe_sum = 0;
     foreach($facturas as $f){
 
-        $abonos = 0.00;
+        $abonos = $f['ABONOS'];
         $saldo_sum += $f['SALDO'];
         $abonos_sum += $abonos;
         $importe_sum += $f['IMPORTE'];
@@ -39,8 +39,8 @@
         <td></td>
         <td></td>
         <td></td>
-        <td class="sumatoria" >$ <?php echo number_format($importe_sum, 2); ?></td>
-        <td class="sumatoria" >$ <?php echo number_format($abonos_sum, 2); ?></td>
+        <td class="sumatoria gris" >$ <?php echo number_format($importe_sum, 2); ?></td>
+        <td class="sumatoria gris" >$ <?php echo number_format($abonos_sum, 2); ?></td>
         <td class="sumatoria" id="saldo_facturado">$ <?php echo number_format($saldo_sum, 2); ?></td>
     </tr>
 

@@ -17,7 +17,7 @@ class Reportes extends CI_Controller {
             //redirect them to the login page
             redirect('auth/login', 'refresh');
         }else{
-            $this->load->helper(array('dompdf', 'file'));
+            $this->load->helper(array('dompdf', 'file','application'));
             $this->load->library('session');
             $this->load->helper(array('url','form'));
             $this->user = new User($this->session->userdata('user_id'));
@@ -45,16 +45,11 @@ class Reportes extends CI_Controller {
         $this->data['movimientos'] = $lst_movimientos;
 
         $html = '';
-
-
+        $html .= "<span id='nombre_cliente'>".$this->user->cliente->razon_social."</span><hr>";
         $html .= $this->load->view('dashboard/movimientos_pendientes', $this->data, true);
-        #$html .= $this->load->view('dashboard/facturas_pendientes', $this->data, true);
+        $html .= $this->load->view('dashboard/facturas_pendientes', $this->data, true);
+        $html .= "<h3>Gran total $ ".number_format(gran_total($lst_movimientos, $lst_facturas),2);
 
-        pdf_create_landscape($html, 'ReporteGeneral'); #pdf_create_landscape
-
-
-
-        #pdf_create($html, 'nodisponible'); #pdf_create_landscape
-
+        pdf_create($html, 'ReporteGeneral'); #pdf_create_landscape
     }
 }

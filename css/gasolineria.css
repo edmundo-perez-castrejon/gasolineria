@@ -27,6 +27,10 @@
     font-size: 120%;
 }
 
+.gris{
+    color: #808080;
+}
+
 #nombre_cliente{
     font-size: 28px;
     float: left;

@@ -38,7 +38,7 @@
         <td></td>
         <td></td>
         <td></td>
-        <td class='sumatoria' ><?php echo number_format($litros_sum, 2 ); ?></td>
+        <td class='sumatoria gris' ><?php echo number_format($litros_sum, 2 ); ?></td>
         <td></td>
         <td class='sumatoria' id="saldo_sin_facturar">$ <?php echo number_format($consumo_sum, 2  ); ?></td>
     </tr>

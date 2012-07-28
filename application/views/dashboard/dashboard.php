@@ -14,7 +14,7 @@
                 echo $partial_facturas_pendientes;
             ?>
             <?PHP
-            //echo anchor('/reportes/dashboard','Imprimir Reporte', array('class'=>'btn success'));
+                echo anchor('/reportes/dashboard','Imprimir Reporte', array('class'=>'btn success'));
             ?>
         </div>
     </div>
