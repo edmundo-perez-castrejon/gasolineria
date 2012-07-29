@@ -52,4 +52,18 @@ class Reportes extends CI_Controller {
 
         pdf_create($html, 'ReporteGeneral'); #pdf_create_landscape
     }
+
+    public function facturas_por_periodo()
+    {
+        $this->load->view('template/header');
+        $this->load->view('reportes/facturas_por_periodo');
+        $this->load->view('template/footer');
+    }
+
+    public function facturas_por_periodo_ajax(){
+        $facturas = $this->user->cliente->facturas_por_periodo($this->input->post('inicio'), $this->input->post('fin'));
+        $data['facturas'] = $facturas;
+        $this->load->view('facturas/listado', $data);
+    }
+
 }

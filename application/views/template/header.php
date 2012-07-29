@@ -19,6 +19,7 @@
 
     <link href="<?php echo base_url();?>assets/bootstrap/bootstrap.css" rel="stylesheet">
     <link href="<?php echo base_url();?>css/gasolineria.css" rel="stylesheet">
+    <link href="<?php echo base_url();?>assets/grocery_crud/css/ui/simple/jquery-ui-1.8.10.custom.css" rel="stylesheet">
 
     <?php
     if(isset($css_files)):
@@ -31,7 +32,8 @@
     else:
         ?>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/flexigrid-1.1/css/flexigrid.pack.css" />
-        <script type="text/javascript" src="<?php echo base_url();?>assets/jquery/jquery-1.5.2.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url();?>assets/grocery_crud/js/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url();?>assets/grocery_crud/js/jquery_plugins/jquery-ui-1.8.10.custom.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/jquery/jquery.formatCurrency-1.4.0.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/flexigrid-1.1/js/flexigrid.pack.js"></script>
         <?php
@@ -123,6 +125,32 @@
     <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
 
+    <script>
+        $(function() {
+            $.datepicker.regional['es'] = {
+                closeText: 'Cerrar',
+                prevText: '&#x3c;Ant',
+                nextText: 'Sig&#x3e;',
+                currentText: 'Hoy',
+                monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+                    'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+                monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
+                    'Jul','Ago','Sep','Oct','Nov','Dic'],
+                dayNames: ['Domingo','Lunes','Martes','Mi&eacute;rcoles','Jueves','Viernes','S&aacute;bado'],
+                dayNamesShort: ['Dom','Lun','Mar','Mi&eacute;','Juv','Vie','S&aacute;b'],
+                dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','S&aacute;'],
+                weekHeader: 'Sm',
+                dateFormat: 'dd/mm/yy',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''};
+            $.datepicker.setDefaults($.datepicker.regional['es']);
+
+            $( "#from").datepicker();
+            $( "#to").datepicker();
+        });
+    </script>
 
 
 </head>
@@ -147,7 +175,7 @@
             ?>
 </a>
             <ul class="nav">
-                <li class="active">
+                <li>
                     <?php
                     if($this->ion_auth->is_admin()){
                         echo anchor('admin/grocery_usuarios','Usuarios');
@@ -155,6 +183,12 @@
                       //  echo anchor('contratos','Contratos');
                     }
                     ?>
+                </li>
+                <li>
+                    <?php echo anchor('reportes/facturas_por_periodo','Facturas por periodo'); ?>
+                </li>
+                <li>
+                    <?php echo anchor('reportes/consumos_por_periodo','Consumos por periodo'); ?>
                 </li>
                 <?php
                     if($this->ion_auth->is_admin()):
@@ -195,14 +229,3 @@
 <div class="container">
 
     <div class="content">
-        <!-- <div class="page-header">
-           <h1>Page name <small>Supporting text or tagline</small></h1>
-       </div>
-       <div class="row">
-           <div class="span10">
-               <h2>Main content</h2>
-           </div>
-           <div class="span4">
-               <h3>Secondary content</h3>
-           </div>
-       </div> -->

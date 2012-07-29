@@ -9,11 +9,11 @@
     <div class="row">
 
         <div align="center">
-            <?php
+                <?php
                 echo $partial_movimientos_pendientes;
                 echo $partial_facturas_pendientes;
-            ?>
-            <?PHP
+                 ?>
+            <?php
                 echo anchor('/reportes/dashboard','Imprimir Reporte', array('class'=>'btn success'));
             ?>
         </div>

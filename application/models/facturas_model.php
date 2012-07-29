@@ -56,10 +56,6 @@ Class Facturas_model extends CI_Model
 
 
     public function get_datos_with_balance($client_id){
-        $this->load->model('movimientos_model');
-
-        $Array_result = array();
-
         $rs = $this->db_connection->execute("
 
         SELECT FACTURA.FACTURA,
@@ -77,8 +73,40 @@ Class Facturas_model extends CI_Model
                         FACTURA.VENCIMIENTO,
                         FACTURA.IMPORTE
             HAVING SUM(CONSUMO)-SUM(ABONO)>0.1
+            ORDER BY FACTURA.FECHA DESC
         ");
 
+         return $this->make_array_result($rs);
+    }
+
+    public function facturas_por_periodo($client_id, $inicio, $fin){
+        $sql = "
+
+        SELECT FACTURA.FACTURA,
+               FACTURA.FECHA,
+               FACTURA.VENCIMIENTO,
+               FACTURA.VENCIMIENTO-FACTURA.FECHA AS DIASVENCIMIENTO,
+               FACTURA.IMPORTE,
+               SUM(ABONO) AS ABONOS,
+               SUM(CONSUMO)-SUM(ABONO) AS SALDO
+        FROM FACTURA LEFT JOIN MOVIMIENTOS
+            ON FACTURA.FACTURA = MOVIMIENTOS.NUM_FACT
+        WHERE FACTURA.CLIENTE_CLA = $client_id
+            AND FACTURA.FECHA >= #".date_mdy($inicio)."# AND FACTURA.FECHA<=#".date_mdy($fin)."#
+        GROUP BY FACTURA.FACTURA,
+                FACTURA.FECHA,
+                FACTURA.VENCIMIENTO,
+                FACTURA.IMPORTE
+        ORDER BY FACTURA.FECHA DESC
+        ";
+
+        $rs = $this->db_connection->execute($sql);
+
+        return $this->make_array_result($rs);
+    }
+
+    private function make_array_result($rs){
+        $Array_result = array();
         while (!$rs->EOF) {
             $Reg = array();
             foreach($rs->Fields as $field){

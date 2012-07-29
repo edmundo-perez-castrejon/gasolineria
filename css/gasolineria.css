@@ -15,6 +15,10 @@
 .font-small{
     font-size: 8px;
 }
+
+.hasDatepicker{
+    width: 70px;
+}
 .saldo{
     color: red;
     font-size: 28px;
