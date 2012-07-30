@@ -1,5 +1,5 @@
 <h3>Facturas pendientes</h3>
-<table>
+<table class="table table-bordered">
     <thead>
     <th>No FACTURA</th>
     <th>FECHA</th>

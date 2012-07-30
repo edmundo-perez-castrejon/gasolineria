@@ -4,7 +4,7 @@
 Consultar las facturas en el periodo:
 <input type="text" id="from" value="<?php echo '01/'.date('m').'/'.date('Y');?>"/> -
 <input type="text" id="to" value="<?php echo date('d/m/Y');?>"/>
-    <span class='btn success' id='btn_consulta'>Consultar</span>
+    <span class='btn btn-success' id='btn_consulta'>Consultar</span>
 <div id='resultados'>
     ---
 </div>

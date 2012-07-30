@@ -1,5 +1,5 @@
 <h3>Movimientos</h3>
-<table>
+<table class="table-bordered table">
     <thead>
     <th>FOLIO</th>
     <th>FECHA</th>

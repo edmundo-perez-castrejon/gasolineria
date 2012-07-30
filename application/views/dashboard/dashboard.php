@@ -1,11 +1,10 @@
-
 <div class="page-header">
     <span id='nombre_cliente'><?php echo $user->cliente->razon_social ?></span>
     <span class='saldo' id='saldo_total'>$0.00</span>
     <span class="label label-info" id="gran_total">Gran Total</span>
 </div>
 
-<div class='mainInfo'>
+
     <div class="row">
 
         <div align="center">
@@ -14,11 +13,11 @@
                 echo $partial_facturas_pendientes;
                  ?>
             <?php
-                echo anchor('/reportes/dashboard','Imprimir Reporte', array('class'=>'btn success'));
+                echo anchor('/reportes/dashboard','Imprimir Reporte', array('class'=>'btn btn-success'));
             ?>
         </div>
     </div>
-</div>
+
 
 <script language="javascript">
     $(document).ready(function() {

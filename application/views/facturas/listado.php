@@ -1,4 +1,4 @@
-<table>
+<table class="table-bordered table">
     <thead>
     <th>No FACTURA</th>
     <th>FECHA</th>

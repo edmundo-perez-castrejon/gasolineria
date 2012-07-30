@@ -40,25 +40,6 @@
     ?>
 
 
-
-
-   <!-- <style type='text/css'>
-        body
-        {
-            font-family: Arial;
-            font-size: 14px;
-        }
-        a {
-            color: blue;
-            text-decoration: none;
-            font-size: 14px;
-        }
-        a:hover
-        {
-            text-decoration: underline;
-        }
-    </style> -->
-
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -156,9 +137,14 @@
 
 <body>
 
-<div class="topbar">
-    <div class="fill">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
         <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
         <?php
                 if(isset($uri))
                 {
@@ -216,10 +202,22 @@
                         <?php
                     endif;
                 ?>
-
-                <li><?php echo anchor('auth/logout','Salir');?></li>
             </ul>
-            <p class="pull-right">Sesión iniciada como <a href="#"><?php echo $this->session->userdata('username'); ?></a></p>
+
+            <!-- <span class='pull-right'>
+                Sesión iniciada como <a href="#"></a>
+            </span>-->
+            <div class="btn-group pull-right">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-user"></i> <?php echo $this->session->userdata('username'); ?>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <!-- <li><a href="#">Profile</a></li> -->
+                    <li class="divider"></li>
+                    <li><?php  echo anchor('auth/logout','Salir');?></li>
+                </ul>
+            </div>
 
         </div>
 

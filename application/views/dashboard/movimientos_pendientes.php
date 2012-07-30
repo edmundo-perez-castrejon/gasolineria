@@ -1,5 +1,5 @@
 <h3>Movimientos no facturados</h3>
-<table>
+<table class="table table-bordered">
     <thead>
     <th>FOLIO</th>
     <th>FECHA</th>

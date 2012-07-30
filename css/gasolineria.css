@@ -15,6 +15,11 @@
     font-size: 8px;
 }
 
+footer{
+    text-align: center;
+    font-size: 80%;
+}
+
 .gris{
     color: #808080;
 }

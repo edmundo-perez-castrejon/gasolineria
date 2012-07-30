@@ -12,59 +12,8 @@
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="<?php echo base_url();?>assets/bootstrap/bootstrap.css" rel="stylesheet">
-    <style type="text/css">
-            /* Override some defaults */
-        html, body {
-            background-color: #eee;
-        }
-        body {
-            padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
-        }
-        .container > footer p {
-            text-align: center; /* center align it with the container */
-        }
-        .container {
-            width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
-        }
-
-            /* The white background content wrapper */
-        .container > .content {
-            background-color: #fff;
-            padding: 20px;
-            margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
-            -webkit-border-radius: 0 0 6px 6px;
-            -moz-border-radius: 0 0 6px 6px;
-            border-radius: 0 0 6px 6px;
-            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-            -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-            box-shadow: 0 1px 2px rgba(0,0,0,.15);
-        }
-
-            /* Page header tweaks */
-        .page-header {
-            background-color: #f5f5f5;
-            padding: 20px 20px 10px;
-            margin: -20px -20px 20px;
-        }
-
-            /* Styles you shouldn't keep as they are for displaying this base example only */
-        .content .span10,
-        .content .span4 {
-            min-height: 500px;
-        }
-            /* Give a quick and non-cross-browser friendly divider */
-        .content .span4 {
-            margin-left: 0;
-            padding-left: 19px;
-            border-left: 1px solid #eee;
-        }
-
-        .topbar .btn {
-            border: 0;
-        }
-
-    </style>
+    <link href="<?php echo base_url();?>assets/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="<?php echo base_url();?>css/gasolineria.css" rel="stylesheet">
 
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="images/favicon.ico">
@@ -75,22 +24,29 @@
 
 <body>
 
-<div class="topbar">
-    <div class="fill">
+
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner">
         <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
             <a class="brand" href="#"><?php echo $this->config->item('nombre_sistema');?></a>
-            <ul class="nav">
-                <li class="active"><a href="#">Inicio</a></li>
-                <li><a href="#contact">Contacto</a></li>
-            </ul>
+            <div class="nav-collapse">
+                <ul class="nav">
+                    <li class="active"><a href="#">Inicio</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </div>
 
-
-
-            <?php echo form_open("auth/login", array('class'=>'pull-right'));?>
+            <?php echo form_open("auth/login", array('class'=>'navbar-form pull-right'));?>
                 <input class="input-small" type="text" placeholder="Usuario" id="identity" name="identity">
                 <input class="input-small" type="password" placeholder="Clave" id="password" name="password">
-                <button class="btn success" type="submit">Acceder</button>
+                <button class="btn btn-success" type="submit">Acceder</button>
             </form>
+
             <div id="infoMessage" style="color: #FF7171;"><?php echo $message;?></div>
         </div>
 
@@ -99,27 +55,13 @@
 
 <div class="container">
 
-    <div class="content">
-       <!-- <div class="page-header">
-            <h1>Page name <small>Supporting text or tagline</small></h1>
-        </div>
+    <div class="hero-unit">
         <div class="row">
-            <div class="span10">
-                <h2>Main content</h2>
-            </div>
-            <div class="span4">
-                <h3>Secondary content</h3>
-            </div>
-        </div> -->
-        <div class='mainInfo'>
-            <div class="row">
 
-                <div align="center">
-                    <img src="<?php echo $imagen_frontal;?>" width="600" />
-                </div>
+            <div align="center">
+                <img src="<?php echo $imagen_frontal;?>" width="600" />
             </div>
         </div>
-
     </div>
 
     <footer>
