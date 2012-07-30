@@ -15,9 +15,8 @@
     <meta name="author" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=Emulate7" />
 
-    <!-- Le styles -->
-
-    <link href="<?php echo base_url();?>assets/bootstrap/bootstrap.css" rel="stylesheet">
+    <!-- Le styles with bootstrap 2.0.4-->
+    <link href="<?php echo base_url();?>assets/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="<?php echo base_url();?>css/gasolineria.css" rel="stylesheet">
     <link href="<?php echo base_url();?>assets/grocery_crud/css/ui/simple/jquery-ui-1.8.10.custom.css" rel="stylesheet">
 
