@@ -61,9 +61,26 @@ class Reportes extends CI_Controller {
     }
 
     public function facturas_por_periodo_ajax(){
-        $facturas = $this->user->cliente->facturas_por_periodo($this->input->post('inicio'), $this->input->post('fin'));
+        $data['inicio'] =$this->input->post('inicio');
+        $data['fin'] = $this->input->post('fin');
+        $facturas = $this->user->cliente->facturas_por_periodo($data['inicio'], $data['fin']);
         $data['facturas'] = $facturas;
+
         $this->load->view('facturas/listado', $data);
+        $this->load->view('facturas/boton_imprimir', $data);
+    }
+
+    public function facturas_por_periodo_pdf()
+    {
+        $inicio = str_replace('-','/',$this->uri->segment(3));
+        $fin= str_replace('-','/',$this->uri->segment(4));
+
+        $facturas = $this->user->cliente->facturas_por_periodo($inicio, $fin);
+        $data['facturas'] = $facturas;
+
+        $html = $this->load->view('facturas/listado', $data, true);
+
+        pdf_create($html, 'facturas_por_periodo'); #pdf_create_landscape
     }
 
     public function consumos_por_periodo()
@@ -74,9 +91,25 @@ class Reportes extends CI_Controller {
     }
 
     public function movimientos_por_periodo_ajax(){
-        $movimientos = $this->user->cliente->movimientos_por_periodo($this->input->post('inicio'), $this->input->post('fin'));
+        $data['inicio'] =$this->input->post('inicio');
+        $data['fin'] = $this->input->post('fin');
+        $movimientos = $this->user->cliente->movimientos_por_periodo($data['inicio'],$data['fin']);
         $data['movimientos'] = $movimientos;
         $this->load->view('consumos/listado', $data);
+        $this->load->view('consumos/boton_imprimir', $data);
+
+    }
+
+    public function movimientos_por_periodo_pdf()
+    {
+        $inicio = str_replace('-','/',$this->uri->segment(3));
+        $fin= str_replace('-','/',$this->uri->segment(4));
+
+        $movimientos = $this->user->cliente->movimientos_por_periodo($inicio, $fin);
+        $data['movimientos'] = $movimientos;
+        $html = $this->load->view('consumos/listado', $data, true);
+
+        pdf_create($html, 'movimientos_por_periodo'); #pdf_create_landscape
     }
 
 
