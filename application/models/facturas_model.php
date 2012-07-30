@@ -7,6 +7,7 @@ Class Facturas_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
+
         $this->db_connection = new COM("ADODB.Connection");
 
         $db_connstr = "DRIVER={Microsoft Access Driver (*.mdb)}
@@ -76,7 +77,7 @@ Class Facturas_model extends CI_Model
             ORDER BY FACTURA.FECHA DESC
         ");
 
-         return $this->make_array_result($rs);
+         return make_array_result($rs);
     }
 
     public function facturas_por_periodo($client_id, $inicio, $fin){
@@ -102,22 +103,7 @@ Class Facturas_model extends CI_Model
 
         $rs = $this->db_connection->execute($sql);
 
-        return $this->make_array_result($rs);
-    }
-
-    private function make_array_result($rs){
-        $Array_result = array();
-        while (!$rs->EOF) {
-            $Reg = array();
-            foreach($rs->Fields as $field){
-                $Reg[$field->name] = $field->value;
-            }
-
-            $rs->MoveNext();
-            $Array_result[] = $Reg;
-        }
-
-        return $Array_result;
+        return make_array_result($rs);
     }
 }
 //end of file Contratos_model

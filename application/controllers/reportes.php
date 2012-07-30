@@ -66,4 +66,18 @@ class Reportes extends CI_Controller {
         $this->load->view('facturas/listado', $data);
     }
 
+    public function consumos_por_periodo()
+    {
+        $this->load->view('template/header');
+        $this->load->view('reportes/consumos_por_periodo');
+        $this->load->view('template/footer');
+    }
+
+    public function movimientos_por_periodo_ajax(){
+        $movimientos = $this->user->cliente->movimientos_por_periodo($this->input->post('inicio'), $this->input->post('fin'));
+        $data['movimientos'] = $movimientos;
+        $this->load->view('consumos/listado', $data);
+    }
+
+
 }

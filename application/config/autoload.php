@@ -64,7 +64,7 @@ $autoload['libraries'] = array('ion_auth','grocery_CRUD', 'datamapper');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array();
+$autoload['helper'] = array('application');
 
 
 /*

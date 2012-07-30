@@ -1,6 +1,5 @@
-.reporte-header {
-    background-color: lightgray;
-    font-weight: bold;
+.abono{
+    background-color: #adff2f;
 }
 
 .clave {
@@ -16,9 +15,27 @@
     font-size: 8px;
 }
 
+.gris{
+    color: #808080;
+}
+
 .hasDatepicker{
     width: 70px;
 }
+
+.label{
+    background-color: #1EA272;
+}
+
+.page-header{
+    height: 20px;
+}
+
+.reporte-header {
+    background-color: lightgray;
+    font-weight: bold;
+}
+
 .saldo{
     color: red;
     font-size: 28px;
@@ -31,24 +48,18 @@
     font-size: 120%;
 }
 
-.gris{
-    color: #808080;
+#gran_total{
+    float: right;
+    margin: -3px 11px;
 }
+
 
 #nombre_cliente{
     font-size: 28px;
     float: left;
 }
 
-#gran_total{
-    float: right;
-    margin: -3px 11px;
-}
 
-.page-header{
-    height: 20px;
-}
 
-.label{
-    background-color: #1EA272;
-}
+
+

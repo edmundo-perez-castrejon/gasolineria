@@ -187,5 +187,17 @@ Class Movimientos_model extends CI_Model
         $rs->Close();
         return $Array_result;
     }
+
+    public function movimientos_por_periodo($client_id, $inicio, $fin)
+    {
+        $sql = "SELECT * FROM MOVIMIENTOS WHERE CLAVE_CLIENTE_MOV = $client_id
+                AND FECHA >= #".date_mdy($inicio)."# AND FECHA<=#".date_mdy($fin)."#
+                ORDER BY FOLIO DESC";
+
+        $rs = $this->db_connection->execute($sql);
+
+        return make_array_result($rs);
+    }
+
 }
 //end of file Contratos_model

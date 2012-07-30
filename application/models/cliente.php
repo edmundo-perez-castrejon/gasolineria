@@ -36,6 +36,12 @@ class Cliente extends DataMapper{
         $lst_facturas = $this->CI->facturas_model->facturas_por_periodo($this->clave_cliente, $inicio, $fin);
         return $lst_facturas;
     }
+
+    public function movimientos_por_periodo($inicio, $fin)
+    {
+        $lst_movs = $this->CI->movimientos_model->movimientos_por_periodo($this->clave_cliente, $inicio, $fin);
+        return $lst_movs;
+    }
 }
 
 //end of filw
