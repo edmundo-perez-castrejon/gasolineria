@@ -7,6 +7,8 @@ Class Clientes_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
+
+        $this->load->helper('application');
         $this->db_connection = new COM("ADODB.Connection");
 
         $db_connstr = "DRIVER={Microsoft Access Driver (*.mdb)}
@@ -17,6 +19,13 @@ Class Clientes_model extends CI_Model
         $this->db_connection->open($db_connstr);
 
         $this->load->database();
+    }
+
+    public function get_datos_access($cve_cliente)
+    {
+        $sql = "SELECT * FROM CLIENTES WHERE CLAVE_CLIENTE = $cve_cliente";
+        $rs = $this->db_connection->execute($sql);
+        return make_array_result($rs);
     }
 
     public function __destruct()

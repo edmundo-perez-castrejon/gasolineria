@@ -18,7 +18,7 @@ $config['base_url']	= '';
 
 $config['nombre_sistema'] = 'Control de Saldos';
 
-$config['db_access_name'] = 'CONTROL2009.mdb';
+$config['db_access_name'] = 'CONTROL2012.mdb';
 
 $config['dev_mode'] = FALSE;
 /*
