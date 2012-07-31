@@ -105,32 +105,39 @@
     <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
 
-    <script>
-        $(function() {
-            $.datepicker.regional['es'] = {
-                closeText: 'Cerrar',
-                prevText: '&#x3c;Ant',
-                nextText: 'Sig&#x3e;',
-                currentText: 'Hoy',
-                monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
-                    'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
-                monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
-                    'Jul','Ago','Sep','Oct','Nov','Dic'],
-                dayNames: ['Domingo','Lunes','Martes','Mi&eacute;rcoles','Jueves','Viernes','S&aacute;bado'],
-                dayNamesShort: ['Dom','Lun','Mar','Mi&eacute;','Juv','Vie','S&aacute;b'],
-                dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','S&aacute;'],
-                weekHeader: 'Sm',
-                dateFormat: 'dd/mm/yy',
-                firstDay: 1,
-                isRTL: false,
-                showMonthAfterYear: false,
-                yearSuffix: ''};
-            $.datepicker.setDefaults($.datepicker.regional['es']);
+    <?php
+    if(!$this->ion_auth->is_admin()){
+        ?>
+        <script>
+            $(function() {
+                $.datepicker.regional['es'] = {
+                    closeText: 'Cerrar',
+                    prevText: '&#x3c;Ant',
+                    nextText: 'Sig&#x3e;',
+                    currentText: 'Hoy',
+                    monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+                        'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+                    monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
+                        'Jul','Ago','Sep','Oct','Nov','Dic'],
+                    dayNames: ['Domingo','Lunes','Martes','Mi&eacute;rcoles','Jueves','Viernes','S&aacute;bado'],
+                    dayNamesShort: ['Dom','Lun','Mar','Mi&eacute;','Juv','Vie','S&aacute;b'],
+                    dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','S&aacute;'],
+                    weekHeader: 'Sm',
+                    dateFormat: 'dd/mm/yy',
+                    firstDay: 1,
+                    isRTL: false,
+                    showMonthAfterYear: false,
+                    yearSuffix: ''};
+                $.datepicker.setDefaults($.datepicker.regional['es']);
 
-            $( "#from").datepicker();
-            $( "#to").datepicker();
-        });
-    </script>
+                $( "#from").datepicker();
+                $( "#to").datepicker();
+            });
+        </script>
+        <?php
+    }
+    ?>
+
 
 
 </head>
@@ -169,12 +176,7 @@
                     }
                     ?>
                 </li>
-                <li>
-                    <?php echo anchor('reportes/facturas_por_periodo','Facturas por periodo'); ?>
-                </li>
-                <li>
-                    <?php echo anchor('reportes/consumos_por_periodo','Consumos por periodo'); ?>
-                </li>
+
                 <?php
                     if($this->ion_auth->is_admin()):
                         ?>
@@ -190,16 +192,25 @@
                         if($this->session->userdata('username') == 'root')
                         {
                             ?>
-                            <li>
+                            <!-- <li>
                                 <?php //echo anchor('muelles/admin','Muelles');
                                 echo anchor('reportes/under_construction','Test Report');
                                 ?>
-                            </li>
+                            </li> -->
                             <?php
                         }
                         ?>
 
                         <?php
+                   else:
+                    ?>
+                       <li>
+                           <?php echo anchor('reportes/facturas_por_periodo','Facturas por periodo'); ?>
+                       </li>
+                       <li>
+                           <?php echo anchor('reportes/consumos_por_periodo','Consumos por periodo'); ?>
+                       </li>
+                       <?php
                     endif;
                 ?>
             </ul>
