@@ -191,10 +191,10 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- <li><a href="#">Profile</a></li> -->
-                                <li><?php echo anchor('reportes/saldo_por_cliente','Matriz de vencimientos'); ?></li>
+                                <li><?php echo anchor('reportes/matriz_vencimientos','Matriz de vencimientos'); ?></li>
                                 <li class="divider"></li>
                                 <li><?php echo anchor('reportes/saldo_por_cliente','Facturas con saldo'); ?></li>
-                                <li><?php echo anchor('reportes/under_construction','Facturas por vencimiento'); ?></li>
+                                <li><?php echo anchor('reportes/facturas_por_vencimiento','Facturas por vencimiento'); ?></li>
                             </ul>
                         </div>
                         <?php

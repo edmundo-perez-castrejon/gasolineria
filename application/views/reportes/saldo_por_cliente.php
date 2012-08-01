@@ -1,8 +1,8 @@
-<h1>Saldo por Cliente</h1>
+<h1><?php echo $title ?></h1>
 
 <p>Seleccione el cliente: </p>
 
-<?php echo form_open('reportes/saldo_por_cliente_pdf','method=POST') ?>
+<?php echo form_open('reportes/'.$form_action,'method=POST') ?>
 <div>
     <?php    echo form_dropdown('clientes', $clientes,0,'id="cmb_clientes"'); ?>
 </div>

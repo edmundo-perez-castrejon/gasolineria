@@ -72,7 +72,7 @@ Class Facturas_model extends CI_Model
                         FACTURA.FECHA,
                         FACTURA.IMPORTE
             HAVING SUM(CONSUMO)-SUM(ABONO)>0.1
-            ORDER BY FACTURA.FECHA DESC
+            ORDER BY #$hoy_dmy#-(FACTURA.FECHA+$plazo) DESC
 ";
         $rs = $this->db_connection->execute($sql);
 
