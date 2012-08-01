@@ -17,11 +17,16 @@ class Reportes extends CI_Controller {
             //redirect them to the login page
             redirect('auth/login', 'refresh');
         }else{
-            $this->load->helper(array('dompdf', 'file','application'));
+            $this->load->helper(array('dompdf', 'file','application','url','form'));
             $this->load->library('session');
-            $this->load->helper(array('url','form'));
+            $this->load->model('clientes_model');
+
+            $this->load->library('mpdf54/mpdf');
+            $this->mpdf=new mPDF('c','A4','','',32,25,27,25,16,13);
+
             $this->user = new User($this->session->userdata('user_id'));
             $this->user->cliente->get();
+
         }
 
     }
@@ -30,8 +35,11 @@ class Reportes extends CI_Controller {
     {
         $data = array();
         $html = $this->load->view('reportes/under_construction', $data, true);
-        pdf_create($html, 'nodisponible'); #pdf_create_landscape
-        #$this->load->view('reportes/under_construction');
+
+
+        $this->mpdf->WriteHTML($html,2);
+        $this->mpdf->Output('mpdf.pdf','I');
+
     }
 
     public function dashboard()
@@ -61,7 +69,7 @@ class Reportes extends CI_Controller {
     }
 
     public function facturas_por_periodo_ajax(){
-        $data['inicio'] =$this->input->post('inicio');
+        $data['inicio'] = $this->input->post('inicio');
         $data['fin'] = $this->input->post('fin');
         $facturas = $this->user->cliente->facturas_por_periodo($data['inicio'], $data['fin']);
         $data['facturas'] = $facturas;
@@ -112,5 +120,62 @@ class Reportes extends CI_Controller {
         pdf_create($html, 'movimientos_por_periodo'); #pdf_create_landscape
     }
 
+    public function saldo_por_cliente(){
 
+        $lst_clientes = $this->clientes_model->get_datos('CLAVE_CLIENTE, RAZON_SOCIAL');
+
+        $cmb_clientes = array('0'=>'TODOS');
+        foreach($lst_clientes as $c){
+            $cmb_clientes[$c['CLAVE_CLIENTE']] = $c['CLAVE_CLIENTE'].' - '.$c['RAZON_SOCIAL'];
+        }
+
+        $data['clientes'] = $cmb_clientes;
+
+        $this->load->view('template/header');
+        $this->load->view('reportes/saldo_por_cliente', $data);
+        $this->load->view('template/footer');
+    }
+
+    public function saldo_por_cliente_pdf(){
+        $cliente_id = $this->input->post('clientes');
+        $gran_total = 0;
+
+        if($cliente_id > 0){
+            $facturas = $this->facturas_model->get_datos_with_balance($cliente_id, 15);
+            $data['facturas'] = $facturas;
+            $data['cliente'] = $this->clientes_model->get_datos_access($cliente_id);
+            $saldo_cliente = 0;
+            foreach($facturas as $f){
+                $saldo_cliente += $f['SALDO'];
+            }
+            $gran_total += $saldo_cliente;
+            $html = $this->load->view('reportes/saldo_por_cliente_rpt', $data, true );
+        }else{
+            $lst_clientes = $this->clientes_model->get_datos('CLAVE_CLIENTE');
+            $html = '';
+            foreach($lst_clientes as $c){
+                $cliente_id = $c['CLAVE_CLIENTE'];
+                $facturas = $this->facturas_model->get_datos_with_balance($cliente_id, 15);
+
+                if(count($facturas)>0){
+                    $data['facturas'] = $facturas;
+                    $data['cliente'] = $this->clientes_model->get_datos_access($cliente_id);
+
+                    $saldo_cliente = 0;
+
+                    foreach($facturas as $f){
+                        $saldo_cliente += $f['SALDO'];
+                    }
+
+                    $html .= $this->load->view('reportes/saldo_por_cliente_rpt', $data, true );
+                    $gran_total +=  $saldo_cliente;
+                }
+            }
+        }
+
+        $html .= "<hr>GRAN TOTAL : <h1>$ ".number_format($gran_total,2)."</h1>";
+
+        $this->mpdf->WriteHTML($html,2);
+        $this->mpdf->Output('mpdf.pdf','I');
+    }
 }

@@ -55,7 +55,6 @@ Class Facturas_model extends CI_Model
         return $Array_result;
     }
 
-
     public function get_datos_with_balance($client_id, $plazo){
         $hoy_dmy = date('m/d/Y');
         $sql = "

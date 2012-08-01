@@ -180,23 +180,31 @@
                 <?php
                     if($this->ion_auth->is_admin()):
                         ?>
-                        <li>
-                            <?php echo anchor('admin/clientes', 'Clientes'); ?>
-                        </li>
+
                         <li>
                             <?php echo anchor('admin/configuracion','Configuracion'); ?>
                         </li>
-
+                        <div class="btn-group pull-right">
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="icon-print"></i> Reportes
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- <li><a href="#">Profile</a></li> -->
+                                <li><?php echo anchor('reportes/saldo_por_cliente','Matriz de vencimientos'); ?></li>
+                                <li class="divider"></li>
+                                <li><?php echo anchor('reportes/saldo_por_cliente','Facturas con saldo'); ?></li>
+                                <li><?php echo anchor('reportes/under_construction','Facturas por vencimiento'); ?></li>
+                            </ul>
+                        </div>
                         <?php
 
                         if($this->session->userdata('username') == 'root')
                         {
                             ?>
-                            <!-- <li>
-                                <?php //echo anchor('muelles/admin','Muelles');
-                                echo anchor('reportes/under_construction','Test Report');
-                                ?>
-                            </li> -->
+                            <li>
+                                <?php echo anchor('admin/clientes', 'Clientes'); ?>
+                            </li>
                             <?php
                         }
                         ?>

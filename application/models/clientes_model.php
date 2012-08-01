@@ -33,40 +33,10 @@ Class Clientes_model extends CI_Model
         $this->db_connection->Close();
     }
 
-    public function get_datos()
+    public function get_datos($fields = '*')
     {
-
-        $Array_result = array();
-
-        $rs = $this->db_connection->execute("SELECT * FROM CLIENTES");
-
-        $rs_fld0 = $rs->Fields(0); #CLAVE_CLIENTE
-        $rs_fld1 = $rs->Fields(1); #RAZON SOCIAL
-        $rs_fld2 = $rs->Fields(6); #RFC
-        $rs_fld3 = $rs->Fields(2); #DOMICILIO
-            $rs_fld4 = $rs->Fields(3); #COLONIA
-            $rs_fld5 = $rs->Fields(4); #CIUDAD
-            $rs_fld6 = $rs->Fields(5); #ESTADO
-        $rs_fld7 = $rs->Fields(11); #CONTACTO
-
-        while (!$rs->EOF) {
-
-            $razon_social = ($rs_fld1->value == null) ? "": $rs_fld1->value;
-
-            $Array_result[] = array($rs_fld0->name => $rs_fld0->value,
-                                    $rs_fld1->name => $razon_social,
-                                    $rs_fld2->name => $rs_fld2->value,
-                                    $rs_fld3->name => $rs_fld3->value,
-                                    $rs_fld4->name => $rs_fld4->value,
-                                    $rs_fld5->name => $rs_fld5->value,
-                                    $rs_fld6->name => $rs_fld6->value,
-                                    $rs_fld7->name => $rs_fld7->value);
-
-            $rs->MoveNext();
-        }
-
-        $rs->Close();
-        return $Array_result;
+        $rs = $this->db_connection->execute("SELECT $fields FROM CLIENTES ORDER BY RAZON_SOCIAL");
+        return make_array_result($rs);
     }
 
     /** sincroniza los clientes de la base de datos de access con la tabla mysql de clientes */

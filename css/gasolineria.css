@@ -53,6 +53,10 @@ footer{
     font-size: 120%;
 }
 
+#cmb_clientes{
+    width: 400px;
+}
+
 #gran_total{
     float: right;
     margin: -3px 11px;
