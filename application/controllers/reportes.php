@@ -284,7 +284,7 @@ class Reportes extends CI_Controller {
         $this->mpdf->Output('facturas_por_vencimiento.pdf','I');
     }
 
-    private function matriz_vencimientos_html($cliente_id)
+    private function matriz_vencimientos_html($cliente_id, $data_extra = null)
     {
         $cliente = $this->clientes_model->get_datos_access($cliente_id);
         $data['cliente'] = $cliente;
@@ -293,6 +293,13 @@ class Reportes extends CI_Controller {
         $data['facturas'] = $new_facturas;
         $nofacturado = $this->movimientos_model->importe_no_facturado($cliente_id);
         $data['movimientos_sum'] = $nofacturado[0]['SUM_CONSUMO'];
+
+        $ultimo_consumo = $this->movimientos_model->get_ultimo_consumo($cliente_id);
+        $data['ultimo_consumo'] = $ultimo_consumo;
+        $ultimo_abono = $this->movimientos_model->get_ultimo_abono($cliente_id);
+        $data['ultimo_abono'] = $ultimo_abono;
+
+        $data['extra'] = $data_extra;
         if(count($facturas) > 0 or $nofacturado[0]['SUM_CONSUMO'] > 0 ){
             $html = $this->load->view('reportes/matriz_vencimiento_rpt', $data, true );
         }
@@ -325,9 +332,12 @@ class Reportes extends CI_Controller {
     public function sobregirados()
     {
         $lst_sobregirados = $this->clientes_model->get_lst_sobregirados();
+
         $html = '';
         foreach($lst_sobregirados as $c){
-            $html .= $this->matriz_vencimientos_html($c['CLAVE_CLIENTE']);
+
+            $extra['estadisticas'] = $c;
+            $html .= $this->matriz_vencimientos_html($c['CLAVE_CLIENTE'], $extra);
         }
 
         $this->mpdf->WriteHTML($html,2);

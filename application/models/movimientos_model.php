@@ -207,5 +207,25 @@ Class Movimientos_model extends CI_Model
         return make_array_result($rs);
     }
 
+    public function get_ultimo_consumo($client_id){
+        $rs = $this->db_connection->execute("SELECT TOP 1 * FROM MOVIMIENTOS
+                                              WHERE CLAVE_CLIENTE_MOV = $client_id
+                                              AND ABONO = 0
+                                              ORDER BY FECHA DESC
+                                              ");
+        $result = make_array_result($rs);
+        return $result[0];
+    }
+
+    public function get_ultimo_abono($client_id){
+        $rs = $this->db_connection->execute("SELECT TOP 1 * FROM MOVIMIENTOS
+                                              WHERE CLAVE_CLIENTE_MOV = $client_id
+                                              AND ABONO > 0
+                                              ORDER BY FECHA DESC
+                                              ");
+        $result = make_array_result($rs);
+        return $result[0];
+    }
+
 }
 //end of file Contratos_model

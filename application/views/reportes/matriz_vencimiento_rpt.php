@@ -1,4 +1,37 @@
-<h3><?php echo $cliente[0]['CLAVE_CLIENTE'].' '.utf8_decode($cliente[0]['RAZON_SOCIAL'])  ?></h3>
+<table class="table" BORDER="0" cellspacing="0" cellpadding="2" width="70%">
+    <tr>
+        <td colspan="2"><h3><?php echo $cliente[0]['CLAVE_CLIENTE'].' '.utf8_decode($cliente[0]['RAZON_SOCIAL'])  ?></h3></td>
+    </tr>
+    <tr>
+        <td width="150px" STYLE="font-size: 12px; border-right: 0px">LIMITE DE CREDITO: </td>
+        <td align="right" style="border-left: 0px"><?php echo number_format($cliente[0]['MONTO_CREDITO'],2) ?></td>
+
+
+    </tr>
+    <?php
+    if($extra){
+    ?>
+        <tr>
+            <td width="150px" STYLE="font-size: 12px; border-right: 0px">SALDO TOTAL: </td>
+            <td align="right" style="border-left: 0px"><?php echo number_format($extra['estadisticas']['SUM_CONSUMO'] - $extra['estadisticas']['SUM_ABONO'],2) ?></td>
+        </tr>
+        <tr>
+            <td width="150px" STYLE="font-size: 12px; border-right: 0px">SOBREGIRO: </td>
+            <td  align="right" style="border-left: 0px; color: red; font-weight: bold"><?php echo number_format($extra['estadisticas']['SOBREGIRO'],2) ?></td>
+        </tr>
+    <?php
+    }
+    ?>
+    <tr>
+        <td width="200px" STYLE="font-size: 12px; border-right: 0px">ULTIMO CONSUMO (<?php echo $ultimo_consumo['FECHA'];?>) : </td>
+        <td align="right" style="border-left: 0px"><?php echo number_format($ultimo_consumo['CONSUMO'],2) ?></td>
+    </tr>
+    <tr>
+        <td width="200px" STYLE="font-size: 12px; border-right: 0px">ULTIMO ABONO (<?php echo $ultimo_abono['FECHA'];?>) : </td>
+        <td align="right" style="border-left: 0px"><?php echo number_format($ultimo_abono['CONSUMO'],2) ?></td>
+    </tr>
+</table>
+<br/>
 <table class="table" BORDER="1" cellspacing="0" cellpadding="1" width="100%">
     <tr>
         <th style="font-size: 11" WIDTH="70px">#FACT.</th>
