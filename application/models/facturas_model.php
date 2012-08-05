@@ -79,13 +79,15 @@ Class Facturas_model extends CI_Model
         return make_array_result($rs);
     }
 
-    public function facturas_por_periodo($client_id, $inicio, $fin){
+    public function facturas_por_periodo($client_id, $inicio, $fin, $plazo = 15){
+        $hoy_dmy = date('m/d/Y');
+
         $sql = "
 
         SELECT FACTURA.FACTURA,
                FACTURA.FECHA,
-               FACTURA.VENCIMIENTO,
-               FACTURA.VENCIMIENTO-FACTURA.FECHA AS DIASVENCIMIENTO,
+               FACTURA.FECHA+$plazo AS VENCIMIENTO,
+               #$hoy_dmy#-(FACTURA.FECHA+$plazo) AS DIASVENCIMIENTO,
                FACTURA.IMPORTE,
                SUM(ABONO) AS ABONOS,
                SUM(CONSUMO)-SUM(ABONO) AS SALDO
@@ -95,9 +97,8 @@ Class Facturas_model extends CI_Model
             AND FACTURA.FECHA >= #".date_mdy($inicio)."# AND FACTURA.FECHA<=#".date_mdy($fin)."#
         GROUP BY FACTURA.FACTURA,
                 FACTURA.FECHA,
-                FACTURA.VENCIMIENTO,
                 FACTURA.IMPORTE
-        ORDER BY FACTURA.FECHA DESC
+        ORDER BY #$hoy_dmy#-(FACTURA.FECHA+$plazo) DESC
         ";
 
         $rs = $this->db_connection->execute($sql);
