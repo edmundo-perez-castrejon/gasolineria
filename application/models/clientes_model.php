@@ -33,9 +33,28 @@ Class Clientes_model extends CI_Model
         $this->db_connection->Close();
     }
 
-    public function get_datos($fields = '*')
+    public function get_datos($fields = '*', $where = null)
     {
-        $rs = $this->db_connection->execute("SELECT $fields FROM CLIENTES ORDER BY RAZON_SOCIAL");
+        $sql = "SELECT $fields FROM CLIENTES ";
+
+        if($where){
+            $sql .= ' WHERE '.$where;
+        }
+
+        $sql .= ' ORDER BY RAZON_SOCIAL';
+        $rs = $this->db_connection->execute($sql);
+        return make_array_result($rs);
+    }
+
+    public function get_lst_sobregirados(){
+        $sql = "SELECT CLAVE_CLIENTE, RAZON_SOCIAL, MONTO_CREDITO, SUM(CONSUMO) AS SUM_CONSUMO, SUM(ABONO) AS SUM_ABONO,
+                (MONTO_CREDITO - (SUM(CONSUMO)-SUM(ABONO))) AS SOBREGIRO
+                FROM CLIENTES LEFT JOIN MOVIMIENTOS ON MOVIMIENTOS.CLAVE_CLIENTE_MOV = CLIENTES.CLAVE_CLIENTE
+                WHERE MONTO_CREDITO > 0
+                GROUP BY CLAVE_CLIENTE, RAZON_SOCIAL, MONTO_CREDITO
+                HAVING (MONTO_CREDITO - (SUM(CONSUMO)-SUM(ABONO)))  < 0";
+
+        $rs = $this->db_connection->execute($sql);
         return make_array_result($rs);
     }
 

@@ -1,7 +1,7 @@
 <h3><?php echo $cliente[0]['CLAVE_CLIENTE'].' '.utf8_decode($cliente[0]['RAZON_SOCIAL'])  ?></h3>
 <table class="table" BORDER="1" cellspacing="0" cellpadding="1" width="100%">
     <tr>
-        <th style="font-size: 11">#FACT.</th>
+        <th style="font-size: 11" WIDTH="70px">#FACT.</th>
         <th style="font-size: 11" WIDTH="70px">FECHA</th>
         <th style="font-size: 11" WIDTH="70px">VENCIM.</th>
         <th style="font-size: 11" WIDTH="100px">POR VENCER</th>

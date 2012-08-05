@@ -191,6 +191,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- <li><a href="#">Profile</a></li> -->
+                                <li><?php echo anchor('reportes/sobregirados','Clientes sobregirados'); ?></li>
                                 <li><?php echo anchor('reportes/matriz_vencimientos','Matriz de vencimientos'); ?></li>
                                 <li class="divider"></li>
                                 <li><?php echo anchor('reportes/saldo_por_cliente','Facturas con saldo'); ?></li>

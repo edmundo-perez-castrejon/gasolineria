@@ -321,4 +321,17 @@ class Reportes extends CI_Controller {
 
         return $new_facturas;
     }
+
+    public function sobregirados()
+    {
+        $lst_sobregirados = $this->clientes_model->get_lst_sobregirados();
+        $html = '';
+        foreach($lst_sobregirados as $c){
+            $html .= $this->matriz_vencimientos_html($c['CLAVE_CLIENTE']);
+        }
+
+        $this->mpdf->WriteHTML($html,2);
+        $this->mpdf->Output('clientes_sobregirados.pdf','I');
+    }
+
 }
