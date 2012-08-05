@@ -22,10 +22,6 @@
         $importe_sum += $f['IMPORTE'];
         $dias_vencidos = $f['DIASVENCIMIENTO'];
 
-        if($dias_vencidos<1){
-            $dias_vencidos = 0;
-        }
-
         echo '<tr>';
         echo "<td>".anchor('facturas/detalle_factura/'.$f['FACTURA'], $f['FACTURA'])."</td>";
         echo "<td>".$f['FECHA']."</td>";
