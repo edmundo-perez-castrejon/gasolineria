@@ -18,6 +18,9 @@ class Dashboard extends CI_Controller {
             $this->load->helper(array('url','form'));
             $this->user = new User($this->session->userdata('user_id'));
             $this->user->cliente->get();
+
+            $cfg = new Configuracion();
+            $cfg->get_nombre_empresa(); #Carga el nombre de la empresa en $this->config
         }
     }
 

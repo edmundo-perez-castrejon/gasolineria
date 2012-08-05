@@ -9,8 +9,13 @@
         }else{
             echo $this->config->item('nombre_sistema');
         }
+
+
         ?>
     </p>
+    <?php
+    echo $this->config->item('nombre_empresa');
+    ?>
 
 </footer>
 

@@ -13,7 +13,6 @@ class Auth extends CI_Controller {
 
         $this->load->database();
         $this->load->library('grocery_CRUD');
-        $this->load->model('configuracion_model');
     }
 
 	//redirect if needed, otherwise display the user list
@@ -42,8 +41,11 @@ class Auth extends CI_Controller {
 	//log the user in
 	function login()
 	{
+		$cfg = new Configuracion();
+        $cfg->limit(1)->get();
 		#Cargar imagen frontal
-        $this->data['imagen_frontal'] = base_url().'images/front/'.$this->configuracion_model->get_imagen_frontal();
+        $this->data['imagen_frontal'] = base_url().'images/front/'.$cfg->imagen_frontal;
+        $this->data['nombre_empresa'] = $cfg->nombre_empresa;
 
         $this->data['title'] = "Login";
 

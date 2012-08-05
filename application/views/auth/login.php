@@ -66,6 +66,7 @@
 
     <footer>
         <p>&copy; <?php echo $this->config->item('nombre_sistema');?> 2012</p>
+        <p><?php echo $nombre_empresa;?></p>
     </footer>
 
 </div> <!-- /container -->
