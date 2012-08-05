@@ -1,14 +1,14 @@
 <h3><?php echo $cliente[0]['CLAVE_CLIENTE'].' '.$cliente[0]['RAZON_SOCIAL'] ?></h3>
-<table class="table" BORDER="1">
+<table class="table" BORDER="1" cellspacing="0" cellpadding="1">
     <tr>
-        <th>No FACTURA</th>
-        <th>FECHA</th>
-        <th>VENCIMIENTO</th>
-        <th>SIN VENCER</th>
-        <th>1-7</th>
-        <th>8-15</th>
-        <th>16-23</th>
-        <th>+23</th>
+        <th style="font-size: 11">#FACTURA</th>
+        <th style="font-size: 11" WIDTH="70px">FECHA</th>
+        <th style="font-size: 11">VENCIMIENTO</th>
+        <th style="font-size: 11">POR VENCER</th>
+        <th style="font-size: 11">1-7</th>
+        <th style="font-size: 11">8-15</th>
+        <th style="font-size: 11">16-23</th>
+        <th style="font-size: 11">+23</th>
     </tr>
     <tbody>
     <?php
@@ -27,30 +27,38 @@
         $g5_sum += $f['+23'];
 
         echo '<tr>';
-        echo "<td>".$f['FACTURA']."</td>";
-        echo "<td>".$f['FECHA']."</td>";
-        echo "<td align='center'>".$f['VENCIMIENTO']."</td>";
-        echo "<td align='center'>".number_format($f['SIN_VENCER'],2)."</td>";
-        echo "<td align='center'>".number_format($f['1-7'],2)."</td>";
-        echo "<td align='center'>".number_format($f['8-15'],2)."</td>";
-        echo "<td align='center'>".number_format($f['16-23'],2)."</td>";
-        echo "<td align='center'>".number_format($f['+23'],2)."</td>";
+        echo "<td align='center' style='font-size: 12'>".$f['FACTURA']."</td>";
+        echo "<td align='center' style='font-size: 12'>".$f['FECHA']."</td>";
+        echo "<td align='center' style='font-size: 12'>".$f['VENCIMIENTO']."</td>";
+        echo "<td align='center' style='font-size: 12'>".number_format($f['SIN_VENCER'],2)."</td>";
+        echo "<td align='center' style='font-size: 12'>".number_format($f['1-7'],2)."</td>";
+        echo "<td align='center' style='font-size: 12'>".number_format($f['8-15'],2)."</td>";
+        echo "<td align='center' style='font-size: 12'>".number_format($f['16-23'],2)."</td>";
+        echo "<td align='center' style='font-size: 12'>".number_format($f['+23'],2)."</td>";
         echo '</tr>';
     }
     ?>
     <tr>
-        <td colspan="3">Subtotal</td>
-        <td align="center"><strong><?php echo number_format($g1_sum, 2)?></strong></td>
-        <td align="center"><strong><?php echo number_format($g2_sum, 2)?></strong></td>
-        <td align="center"><strong><?php echo number_format($g3_sum, 2)?></strong></td>
-        <td align="center"><strong><?php echo number_format($g4_sum, 2)?></strong></td>
-        <td align="center"><strong><?php echo number_format($g5_sum, 2)?></strong></td>
+        <td colspan="3" align="right" >Subtotal : </td>
+        <td align="center" style='font-size: 13'><strong><?php echo number_format($g1_sum, 2)?></strong></td>
+        <td align="center" style='font-size: 13'><strong><?php echo number_format($g2_sum, 2)?></strong></td>
+        <td align="center" style='font-size: 13'><strong><?php echo number_format($g3_sum, 2)?></strong></td>
+        <td align="center" style='font-size: 13'><strong><?php echo number_format($g4_sum, 2)?></strong></td>
+        <td align="center" style='font-size: 13'><strong><?php echo number_format($g5_sum, 2)?></strong></td>
     </tr>
     <tr>
-        <td colspan="7">Total</td>
-
-
-        <td align="center"><strong>$<?php echo number_format($g1_sum+$g2_sum+$g3_sum+$g4_sum+$g5_sum, 2)?></strong></td>
+        <td colspan="7" align="right" style="border-right: 0px">Total facturado : </td>
+        <td align="center" style="border-left: 0px"><strong>$<?php echo number_format($g1_sum+$g2_sum+$g3_sum+$g4_sum+$g5_sum, 2)?></strong></td>
+    </tr>
+    <tr>
+        <td colspan="7" align="right" style="border-right: 0px">Total sin facturar : </td>
+        <td align="center" style="border-left: 0px"><strong>$<?php echo number_format($movimientos_sum, 2)?></strong></td>
+    </tr>
+    <tr>
+        <td colspan="7" align="right" style="border-right: 0px" bgcolor="#d3d3d3">GRAN TOTAL : </td>
+        <td align="center" style="border-left: 0px; font-size: 16px" BGCOLOR="#d3d3d3">
+            <strong>$<?php echo number_format($g1_sum+$g2_sum+$g3_sum+$g4_sum+$g5_sum+$movimientos_sum, 2)?></strong>
+        </td>
     </tr>
 
     </tbody>

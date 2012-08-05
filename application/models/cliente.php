@@ -30,6 +30,12 @@ class Cliente extends DataMapper{
         return $lst_movs;
     }
 
+    public function get_importe_no_facturado()
+    {
+        $array_tmp  =$this->CI->movimientos_model->importe_no_facturado($this->clave_cliente);
+        return $array_tmp[0]['SUM_CONSUMO'];
+    }
+
     public function facturas_por_periodo($inicio, $fin)
     {
         $lst_facturas = $this->CI->facturas_model->facturas_por_periodo($this->clave_cliente, $inicio, $fin);

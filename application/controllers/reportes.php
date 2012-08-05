@@ -276,6 +276,7 @@ class Reportes extends CI_Controller {
             $facturas = $this->facturas_model->get_datos_with_balance($cliente_id, $cliente[0]['PLAZO']);
             $new_facturas = $this->matriz_facturas($facturas);
             $data['facturas'] = $new_facturas;
+            $data['movimientos_sum'] = $this->user->cliente->get_importe_no_facturado();
             $html = $this->load->view('reportes/matriz_vencimiento_rpt', $data, true );
         }else{
             $lst_clientes = $this->clientes_model->get_datos('CLAVE_CLIENTE, PLAZO');
@@ -287,12 +288,14 @@ class Reportes extends CI_Controller {
                 $facturas = $this->facturas_model->get_datos_with_balance($cliente_id, $cliente[0]['PLAZO']);
                 $new_facturas = $this->matriz_facturas($facturas);
                 $data['facturas'] = $new_facturas;
-
+                $data['movimientos_sum'] = $this->user->cliente->get_importe_no_facturado();
                 if(count($facturas)>0){
                     $html .= $this->load->view('reportes/matriz_vencimiento_rpt', $data, true );
                 }
             }
         }
+
+
 
         $this->mpdf->WriteHTML($html,2);
         $this->mpdf->Output('facturas_por_vencimiento.pdf','I');
