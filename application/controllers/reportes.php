@@ -19,7 +19,6 @@ class Reportes extends CI_Controller {
         }else{
             $this->load->helper(array('dompdf', 'file','application','url','form'));
             $this->load->library('session');
-            $this->load->model('clientes_model');
 
             $this->load->library('mpdf54/mpdf');
             $this->mpdf=new mPDF('c','A4','','',32,25,27,25,16,13);
@@ -271,34 +270,34 @@ class Reportes extends CI_Controller {
         }
 
         if($cliente_id > 0){
-            $cliente = $this->clientes_model->get_datos_access($cliente_id);
-            $data['cliente'] = $cliente;
-            $facturas = $this->facturas_model->get_datos_with_balance($cliente_id, $cliente[0]['PLAZO']);
-            $new_facturas = $this->matriz_facturas($facturas);
-            $data['facturas'] = $new_facturas;
-            $data['movimientos_sum'] = $this->user->cliente->get_importe_no_facturado();
-            $html = $this->load->view('reportes/matriz_vencimiento_rpt', $data, true );
+            $html = $this->matriz_vencimientos_html($cliente_id);
         }else{
             $lst_clientes = $this->clientes_model->get_datos('CLAVE_CLIENTE, PLAZO');
             $html = '';
             foreach($lst_clientes as $c){
                 $cliente_id = $c['CLAVE_CLIENTE'];
-                $cliente = $this->clientes_model->get_datos_access($cliente_id);
-                $data['cliente'] = $cliente;
-                $facturas = $this->facturas_model->get_datos_with_balance($cliente_id, $cliente[0]['PLAZO']);
-                $new_facturas = $this->matriz_facturas($facturas);
-                $data['facturas'] = $new_facturas;
-                $data['movimientos_sum'] = $this->user->cliente->get_importe_no_facturado();
-                if(count($facturas)>0){
-                    $html .= $this->load->view('reportes/matriz_vencimiento_rpt', $data, true );
-                }
+                $html .= $this->matriz_vencimientos_html($cliente_id);
             }
         }
 
-
-
         $this->mpdf->WriteHTML($html,2);
         $this->mpdf->Output('facturas_por_vencimiento.pdf','I');
+    }
+
+    private function matriz_vencimientos_html($cliente_id)
+    {
+        $cliente = $this->clientes_model->get_datos_access($cliente_id);
+        $data['cliente'] = $cliente;
+        $facturas = $this->facturas_model->get_datos_with_balance($cliente_id, $cliente[0]['PLAZO']);
+        $new_facturas = $this->matriz_facturas($facturas);
+        $data['facturas'] = $new_facturas;
+        $nofacturado = $this->movimientos_model->importe_no_facturado($cliente_id);
+        $data['movimientos_sum'] = $nofacturado[0]['SUM_CONSUMO'];
+        if(count($facturas) > 0 or $nofacturado[0]['SUM_CONSUMO'] > 0 ){
+            $html = $this->load->view('reportes/matriz_vencimiento_rpt', $data, true );
+        }
+
+        return $html;
     }
 
     private function matriz_facturas($facturas)

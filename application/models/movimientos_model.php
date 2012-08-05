@@ -201,8 +201,6 @@ Class Movimientos_model extends CI_Model
 
     public function importe_no_facturado($client_id)
     {
-        $Array_result = array();
-
         $rs = $this->db_connection->execute("SELECT SUM(CONSUMO) AS SUM_CONSUMO FROM MOVIMIENTOS
                                               WHERE CLAVE_CLIENTE_MOV = $client_id
                                               AND FACTURADO = 0 AND ABONO = 0");

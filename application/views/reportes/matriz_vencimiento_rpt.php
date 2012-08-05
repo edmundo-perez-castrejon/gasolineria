@@ -1,14 +1,14 @@
-<h3><?php echo $cliente[0]['CLAVE_CLIENTE'].' '.$cliente[0]['RAZON_SOCIAL'] ?></h3>
-<table class="table" BORDER="1" cellspacing="0" cellpadding="1">
+<h3><?php echo $cliente[0]['CLAVE_CLIENTE'].' '.utf8_decode($cliente[0]['RAZON_SOCIAL'])  ?></h3>
+<table class="table" BORDER="1" cellspacing="0" cellpadding="1" width="100%">
     <tr>
-        <th style="font-size: 11">#FACTURA</th>
+        <th style="font-size: 11">#FACT.</th>
         <th style="font-size: 11" WIDTH="70px">FECHA</th>
-        <th style="font-size: 11">VENCIMIENTO</th>
-        <th style="font-size: 11">POR VENCER</th>
-        <th style="font-size: 11">1-7</th>
-        <th style="font-size: 11">8-15</th>
-        <th style="font-size: 11">16-23</th>
-        <th style="font-size: 11">+23</th>
+        <th style="font-size: 11" WIDTH="70px">VENCIM.</th>
+        <th style="font-size: 11" WIDTH="100px">POR VENCER</th>
+        <th style="font-size: 11" WIDTH="100px">1-7</th>
+        <th style="font-size: 11" WIDTH="100px">8-15</th>
+        <th style="font-size: 11" WIDTH="100px">16-23</th>
+        <th style="font-size: 11" WIDTH="100px">+23</th>
     </tr>
     <tbody>
     <?php
@@ -48,15 +48,15 @@
     </tr>
     <tr>
         <td colspan="7" align="right" style="border-right: 0px">Total facturado : </td>
-        <td align="center" style="border-left: 0px"><strong>$<?php echo number_format($g1_sum+$g2_sum+$g3_sum+$g4_sum+$g5_sum, 2)?></strong></td>
+        <td align="right" style="border-left: 0px"><strong>$<?php echo number_format($g1_sum+$g2_sum+$g3_sum+$g4_sum+$g5_sum, 2)?></strong></td>
     </tr>
     <tr>
         <td colspan="7" align="right" style="border-right: 0px">Total sin facturar : </td>
-        <td align="center" style="border-left: 0px"><strong>$<?php echo number_format($movimientos_sum, 2)?></strong></td>
+        <td align="right" style="border-left: 0px"><strong>$<?php echo number_format($movimientos_sum, 2)?></strong></td>
     </tr>
     <tr>
         <td colspan="7" align="right" style="border-right: 0px" bgcolor="#d3d3d3">GRAN TOTAL : </td>
-        <td align="center" style="border-left: 0px; font-size: 16px" BGCOLOR="#d3d3d3">
+        <td align="right" style="border-left: 0px; font-size: 16px" BGCOLOR="#d3d3d3">
             <strong>$<?php echo number_format($g1_sum+$g2_sum+$g3_sum+$g4_sum+$g5_sum+$movimientos_sum, 2)?></strong>
         </td>
     </tr>

@@ -32,7 +32,7 @@ class Cliente extends DataMapper{
 
     public function get_importe_no_facturado()
     {
-        $array_tmp  =$this->CI->movimientos_model->importe_no_facturado($this->clave_cliente);
+        $array_tmp  = $this->CI->movimientos_model->importe_no_facturado($this->clave_cliente);
         return $array_tmp[0]['SUM_CONSUMO'];
     }
 
