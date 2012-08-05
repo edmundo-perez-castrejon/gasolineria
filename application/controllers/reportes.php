@@ -263,8 +263,12 @@ class Reportes extends CI_Controller {
     }
 
     public function matriz_vencimientos_PDF(){
+
         $cliente_id = $this->input->post('clientes');
 
+        if(!$this->ion_auth->is_admin()){
+            $cliente_id =$this->user->cliente->clave_cliente;
+        }
 
         if($cliente_id > 0){
             $cliente = $this->clientes_model->get_datos_access($cliente_id);

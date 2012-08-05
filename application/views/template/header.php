@@ -218,6 +218,9 @@
                        <li>
                            <?php echo anchor('reportes/consumos_por_periodo','Consumos por periodo'); ?>
                        </li>
+                       <li>
+                           <?php echo anchor('reportes/matriz_vencimientos_pdf','Matriz de vencimentos'); ?>
+                       </li>
                        <?php
                     endif;
                 ?>
