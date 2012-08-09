@@ -278,7 +278,7 @@ class Reportes extends CI_Controller {
         if($cliente_id > 0){
             $html .= $this->matriz_vencimientos_html($cliente_id);
         }else{
-            $lst_clientes = $this->clientes_model->get_datos('CLAVE_CLIENTE, PLAZO');
+            $lst_clientes = $this->clientes_model->get_datos_order_deuda('CLAVE_CLIENTE, PLAZO');
             $html = '';
             foreach($lst_clientes as $c){
                 $cliente_id = $c['CLAVE_CLIENTE'];

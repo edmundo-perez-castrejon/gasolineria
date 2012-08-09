@@ -5,8 +5,14 @@
     <tr>
         <td width="150px" STYLE="font-size: 12px; border-right: 0px">LIMITE DE CREDITO: </td>
         <td align="right" style="border-left: 0px"><?php echo number_format($cliente[0]['MONTO_CREDITO'],2) ?></td>
+        <?php
+            if($extra['estadisticas']['SOBREGIRO'] > 0){
+        ?>
         <td width="150px" STYLE="font-size: 12px; border-right: 0px; padding-right: 25px;" align="right">SOBREGIRO: </td>
         <td  align="right" style="border-left: 0px; color: red; font-weight: bold; font-size: 25px;"><?php echo number_format($extra['estadisticas']['SOBREGIRO'],2) ?></td>
+        <?php
+            }
+        ?>
     </tr>
     <?php
     if($extra){
@@ -23,7 +29,7 @@
         <td align="right" style="border-left: 0px"><?php echo number_format($ultimo_consumo['CONSUMO'],2) ?></td>
 
         <td width="200px" STYLE="font-size: 12px; border-right: 0px; padding-left: 25px;">ULTIMO ABONO (<?php echo $ultimo_abono['FECHA'];?>) : </td>
-        <td align="left" style="border-left: 0px"><?php echo number_format($ultimo_abono['CONSUMO'],2) ?></td>
+        <td align="left" style="border-left: 0px"><?php echo number_format($ultimo_abono['ABONO'],2) ?></td>
     </tr>
     <tr>
 

@@ -33,6 +33,16 @@ Class Clientes_model extends CI_Model
         $this->db_connection->Close();
     }
 
+    public function get_datos_order_deuda()
+    {
+        $sql = "SELECT CLAVE_CLIENTE, RAZON_SOCIAL, MONTO_CREDITO
+                FROM CLIENTES LEFT JOIN MOVIMIENTOS ON MOVIMIENTOS.CLAVE_CLIENTE_MOV = CLIENTES.CLAVE_CLIENTE
+                GROUP BY CLAVE_CLIENTE, RAZON_SOCIAL, MONTO_CREDITO
+                ORDER BY ((SUM(CONSUMO) - SUM(ABONO))) DESC";
+
+        $rs = $this->db_connection->execute($sql);
+        return make_array_result($rs);
+    }
     public function get_datos($fields = '*', $where = null)
     {
         $sql = "SELECT $fields FROM CLIENTES ";
