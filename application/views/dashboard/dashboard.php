@@ -21,8 +21,9 @@
 
 <script language="javascript">
     $(document).ready(function() {
-        var facturado  = parseFloat(document.getElementsByName('saldo_facturado')[0].value );
-        var sinfacturar  = parseFloat(document.getElementsByName('saldo_sinfacturar')[0].value );
+        var facturado  = parseFloat(document.getElementById('saldo_facturado_hidden').value);
+        var sinfacturar  = parseFloat(document.getElementById('saldo_sinfacturar_hidden').value);
+
         var grantotal = facturado + sinfacturar;
 
         $('#saldo_total').text(grantotal);

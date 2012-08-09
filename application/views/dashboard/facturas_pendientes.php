@@ -46,4 +46,4 @@
     </tbody>
 </table>
 
-<?php    echo form_hidden('saldo_facturado', $saldo_sum);    ?>
+<input type='hidden' id='saldo_facturado_hidden' value='<?php echo $saldo_sum; ?>'>

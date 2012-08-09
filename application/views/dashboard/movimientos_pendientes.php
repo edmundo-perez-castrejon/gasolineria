@@ -47,4 +47,4 @@
     </tbody>
 </table>
 
-<?php    echo form_hidden('saldo_sinfacturar', $consumo_sum);    ?>
+<input type='hidden' id='saldo_sinfacturar_hidden' value='<?php echo $consumo_sum; ?>'>
