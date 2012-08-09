@@ -53,7 +53,7 @@ Class Clientes_model extends CI_Model
                 WHERE MONTO_CREDITO > 1
                 GROUP BY CLAVE_CLIENTE, RAZON_SOCIAL, MONTO_CREDITO
                 HAVING (MONTO_CREDITO - (SUM(CONSUMO)-SUM(ABONO)))  < 0
-                ORDER BY ((SUM(CONSUMO)-SUM(ABONO)) - MONTO_CREDITO )";
+                ORDER BY ((SUM(CONSUMO)-SUM(ABONO)) - MONTO_CREDITO ) DESC";
 
         $rs = $this->db_connection->execute($sql);
         return make_array_result($rs);
