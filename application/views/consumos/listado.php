@@ -1,4 +1,3 @@
-<h3>Movimientos</h3>
 <table class="table-bordered table">
     <thead>
     <th>FOLIO</th>

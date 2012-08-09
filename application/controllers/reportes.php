@@ -26,6 +26,8 @@ class Reportes extends CI_Controller {
             $this->user = new User($this->session->userdata('user_id'));
             $this->user->cliente->get();
 
+            $cfg = new Configuracion();
+            $cfg->get_nombre_empresa(); #Carga el nombre de la empresa en $this->config
         }
 
     }
@@ -85,7 +87,8 @@ class Reportes extends CI_Controller {
         $facturas = $this->user->cliente->facturas_por_periodo($inicio, $fin);
         $data['facturas'] = $facturas;
 
-        $html = $this->load->view('facturas/listado', $data, true);
+        $html = $this->get_encabezado("Reporte de facturas de $inicio a $fin");
+        $html .= $this->load->view('facturas/listado', $data, true);
 
         pdf_create($html, 'facturas_por_periodo'); #pdf_create_landscape
     }
@@ -114,7 +117,9 @@ class Reportes extends CI_Controller {
 
         $movimientos = $this->user->cliente->movimientos_por_periodo($inicio, $fin);
         $data['movimientos'] = $movimientos;
-        $html = $this->load->view('consumos/listado', $data, true);
+
+        $html = $this->get_encabezado("Reporte de consumos del $inicio al $fin");
+        $html .= $this->load->view('consumos/listado', $data, true);
 
         pdf_create($html, 'movimientos_por_periodo'); #pdf_create_landscape
     }
@@ -269,8 +274,9 @@ class Reportes extends CI_Controller {
             $cliente_id =$this->user->cliente->clave_cliente;
         }
 
+        $html = $this->get_encabezado('Matriz de facturas con vencimento');
         if($cliente_id > 0){
-            $html = $this->matriz_vencimientos_html($cliente_id);
+            $html .= $this->matriz_vencimientos_html($cliente_id);
         }else{
             $lst_clientes = $this->clientes_model->get_datos('CLAVE_CLIENTE, PLAZO');
             $html = '';
@@ -333,7 +339,7 @@ class Reportes extends CI_Controller {
     {
         $lst_sobregirados = $this->clientes_model->get_lst_sobregirados();
 
-        $html = '';
+        $html = $this->get_encabezado('Clientes con sobregiro');
         foreach($lst_sobregirados as $c){
 
             $extra['estadisticas'] = $c;
@@ -342,6 +348,16 @@ class Reportes extends CI_Controller {
 
         $this->mpdf->WriteHTML($html,2);
         $this->mpdf->Output('clientes_sobregirados.pdf','I');
+    }
+
+    private function get_encabezado($title = 'Reporte general'){
+        $html = '';
+        $html = '<h3>'.$this->config->item('nombre_empresa').'</h3>';
+        $html .= "<strong>$title</strong><br/>";
+        $html .= date('d/m/Y');
+        $html .= '<hr>';
+
+        return $html;
     }
 
 }
