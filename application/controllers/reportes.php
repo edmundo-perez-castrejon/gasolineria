@@ -353,8 +353,8 @@ class Reportes extends CI_Controller {
     private function get_encabezado($title = 'Reporte general'){
         $html = '';
         $html = '<h3>'.$this->config->item('nombre_empresa').'</h3>';
-        $html .= "<strong>$title</strong><br/>";
-        $html .= date('d/m/Y');
+        $html .= "<strong>$title al ".date('d/m/Y')."</strong>";
+        #$html .= ;
         $html .= '<hr>';
 
         return $html;
