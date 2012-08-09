@@ -10,10 +10,10 @@ Class Movimientos_model extends CI_Model
         $this->db_connection = new COM("ADODB.Connection");
 
         $db_connstr = "DRIVER={Microsoft Access Driver (*.mdb)}
-        ;DBQ=". realpath("../databases/".$this->config->item('db_access_name')) ."
+        ;DBQ=". realpath("C:/SISTEMA/".$this->config->item('db_access_name')) ."
         ;PWD=HUMY
-        ;DefaultDir=". realpath("../databases");
-
+        ;DefaultDir=C:/SISTEMA/";
+        #. realpath("../databases")
         $this->db_connection->open($db_connstr);
 
         $this->load->database();
