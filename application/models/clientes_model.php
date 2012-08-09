@@ -48,11 +48,12 @@ Class Clientes_model extends CI_Model
 
     public function get_lst_sobregirados(){
         $sql = "SELECT CLAVE_CLIENTE, RAZON_SOCIAL, MONTO_CREDITO, SUM(CONSUMO) AS SUM_CONSUMO, SUM(ABONO) AS SUM_ABONO,
-                (MONTO_CREDITO - (SUM(CONSUMO)-SUM(ABONO))) AS SOBREGIRO
+                ((SUM(CONSUMO)-SUM(ABONO)) - MONTO_CREDITO ) AS SOBREGIRO
                 FROM CLIENTES LEFT JOIN MOVIMIENTOS ON MOVIMIENTOS.CLAVE_CLIENTE_MOV = CLIENTES.CLAVE_CLIENTE
                 WHERE MONTO_CREDITO > 1
                 GROUP BY CLAVE_CLIENTE, RAZON_SOCIAL, MONTO_CREDITO
-                HAVING (MONTO_CREDITO - (SUM(CONSUMO)-SUM(ABONO)))  < 0";
+                HAVING (MONTO_CREDITO - (SUM(CONSUMO)-SUM(ABONO)))  < 0
+                ORDER BY ((SUM(CONSUMO)-SUM(ABONO)) - MONTO_CREDITO )";
 
         $rs = $this->db_connection->execute($sql);
         return make_array_result($rs);

@@ -5,8 +5,8 @@
     <tr>
         <td width="150px" STYLE="font-size: 12px; border-right: 0px">LIMITE DE CREDITO: </td>
         <td align="right" style="border-left: 0px"><?php echo number_format($cliente[0]['MONTO_CREDITO'],2) ?></td>
-
-
+        <td width="150px" STYLE="font-size: 12px; border-right: 0px; padding-right: 25px;" align="right">SOBREGIRO: </td>
+        <td  align="right" style="border-left: 0px; color: red; font-weight: bold; font-size: 25px;"><?php echo number_format($extra['estadisticas']['SOBREGIRO'],2) ?></td>
     </tr>
     <?php
     if($extra){
@@ -14,10 +14,6 @@
         <tr>
             <td width="150px" STYLE="font-size: 12px; border-right: 0px">SALDO TOTAL: </td>
             <td align="right" style="border-left: 0px"><?php echo number_format($extra['estadisticas']['SUM_CONSUMO'] - $extra['estadisticas']['SUM_ABONO'],2) ?></td>
-        </tr>
-        <tr>
-            <td width="150px" STYLE="font-size: 12px; border-right: 0px">SOBREGIRO: </td>
-            <td  align="right" style="border-left: 0px; color: red; font-weight: bold"><?php echo number_format($extra['estadisticas']['SOBREGIRO'],2) ?></td>
         </tr>
     <?php
     }
@@ -27,13 +23,13 @@
         <td align="right" style="border-left: 0px"><?php echo number_format($ultimo_consumo['CONSUMO'],2) ?></td>
 
         <td width="200px" STYLE="font-size: 12px; border-right: 0px; padding-left: 25px;">ULTIMO ABONO (<?php echo $ultimo_abono['FECHA'];?>) : </td>
-        <td align="right" style="border-left: 0px"><?php echo number_format($ultimo_abono['CONSUMO'],2) ?></td>
+        <td align="left" style="border-left: 0px"><?php echo number_format($ultimo_abono['CONSUMO'],2) ?></td>
     </tr>
     <tr>
 
     </tr>
 </table>
-
+<br/>
 <table class="table" BORDER="1" cellspacing="0" cellpadding="1" width="100%">
     <tr>
         <th style="font-size: 11" WIDTH="70px">#FACT.</th>
@@ -65,21 +61,21 @@
         echo "<td align='center' style='font-size: 12'>".$f['FACTURA']."</td>";
         echo "<td align='center' style='font-size: 12'>".$f['FECHA']."</td>";
         echo "<td align='center' style='font-size: 12'>".$f['VENCIMIENTO']."</td>";
-        echo "<td align='center' style='font-size: 12'>".number_format($f['SIN_VENCER'],2)."</td>";
-        echo "<td align='center' style='font-size: 12'>".number_format($f['1-7'],2)."</td>";
-        echo "<td align='center' style='font-size: 12'>".number_format($f['8-15'],2)."</td>";
-        echo "<td align='center' style='font-size: 12'>".number_format($f['16-23'],2)."</td>";
-        echo "<td align='center' style='font-size: 12'>".number_format($f['+23'],2)."</td>";
+        echo "<td align='right' style='font-size: 12'>".number_format($f['SIN_VENCER'],2)."</td>";
+        echo "<td align='right' style='font-size: 12'>".number_format($f['1-7'],2)."</td>";
+        echo "<td align='right' style='font-size: 12'>".number_format($f['8-15'],2)."</td>";
+        echo "<td align='right' style='font-size: 12'>".number_format($f['16-23'],2)."</td>";
+        echo "<td align='right' style='font-size: 12'>".number_format($f['+23'],2)."</td>";
         echo '</tr>';
     }
     ?>
     <tr>
         <td colspan="3" align="right" >Subtotal : </td>
-        <td align="center" style='font-size: 13'><strong><?php echo number_format($g1_sum, 2)?></strong></td>
-        <td align="center" style='font-size: 13'><strong><?php echo number_format($g2_sum, 2)?></strong></td>
-        <td align="center" style='font-size: 13'><strong><?php echo number_format($g3_sum, 2)?></strong></td>
-        <td align="center" style='font-size: 13'><strong><?php echo number_format($g4_sum, 2)?></strong></td>
-        <td align="center" style='font-size: 13'><strong><?php echo number_format($g5_sum, 2)?></strong></td>
+        <td align="right" style='font-size: 13'><strong><?php echo number_format($g1_sum, 2)?></strong></td>
+        <td align="right" style='font-size: 13'><strong><?php echo number_format($g2_sum, 2)?></strong></td>
+        <td align="right" style='font-size: 13'><strong><?php echo number_format($g3_sum, 2)?></strong></td>
+        <td align="right" style='font-size: 13'><strong><?php echo number_format($g4_sum, 2)?></strong></td>
+        <td align="right" style='font-size: 13'><strong><?php echo number_format($g5_sum, 2)?></strong></td>
     </tr>
     <tr>
         <td colspan="7" align="right" style="border-right: 0px">Total facturado : </td>
