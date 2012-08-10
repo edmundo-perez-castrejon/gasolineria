@@ -1,8 +1,14 @@
-- CAMBIO DE LETRA Y ACOMODO DE LAS COLUMNAS (ARIAL 10)
-SUBTOTALES EN NEGRITA Y LETRA MAS GRANDE
-GRAN TOTAL A LA DERECHA
-TITULOS EN NEGRITA
+Teamviewer: 847 525 319 / macroaaa
+Password servidor: macroaaa
 
+====================================
+- Cuadricula para Facturas con Saldo
+- Cuadricula para Facturas con vencimiento
+- Grandes totales en matriz de vencimientos
+- Usuario tipo administrador que solo permita reportear
+- Menos margen en el encabezado de los PDF
+- Reporte de usuarios con razon social, nombre de usuario y contraseña
+- Paginado en los reportes principales
 ===================================================================================================================
 
 - CUANDO LA FECHA AUN NO ESTA VENCIDA NO MOSTRAR 0 SINO EL NUMERO DE DIAS QUE LE QUEDAN
@@ -20,3 +26,10 @@ LIMITE DE CREDITO (TABLA CLIENTE)
 POR PAGAR
 CREDITO DISPONIBLE
 POR FACTURAR (IMPORTE DE MOVIMIENTOS)
+
+- Reporte dashboard con cuadricula y fecha
+____________________________
+- CAMBIO DE LETRA Y ACOMODO DE LAS COLUMNAS (ARIAL 10)
+SUBTOTALES EN NEGRITA Y LETRA MAS GRANDE
+GRAN TOTAL A LA DERECHA
+TITULOS EN NEGRITA

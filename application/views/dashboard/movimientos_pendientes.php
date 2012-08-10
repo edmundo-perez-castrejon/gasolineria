@@ -1,16 +1,16 @@
 <h3>Movimientos no facturados</h3>
-<table class="table table-bordered">
-    <thead>
-    <th>FOLIO</th>
-    <th>FECHA</th>
-    <th>UNIDAD</th>
-    <th>TICKET</th>
-    <th>LTS</th>
-    <th>PRECIO</th>
-    <th>CONSUMO</th>
-    <th>REFERENCIA</th>
-    <th>VALE_NOTA</th>
-    </thead>
+<table class="table table-bordered" BORDER="1" cellspacing="0" cellpadding="1" width="100%">
+    <tr>
+    <th style="font-size: 8">FOLIO</th>
+    <th style="font-size: 8">FECHA</th>
+    <th style="font-size: 8">UNIDAD</th>
+    <th style="font-size: 8">TICKET</th>
+    <th style="font-size: 8">LTS</th>
+    <th style="font-size: 8">PRECIO</th>
+    <th style="font-size: 8">CONSUMO</th>
+    <th style="font-size: 8">REFERENCIA</th>
+    <th style="font-size: 8">VALE_NOTA</th>
+    </tr>
     <tbody>
 
     <?php
@@ -25,9 +25,9 @@
         echo '<td>'.$m['FECHA'].'</td>';
         echo '<td>'.$m['UNIDAD'].'</td>';
         echo '<td>'.$m['TICKET'].'</td>';
-        echo '<td>'.number_format($m['LTS'], 2).'</td>';
-        echo '<td>'.$m['PRECIO_PROD_MOV'].'</td>';
-        echo '<td>'.$m['CONSUMO'].'</td>';
+        echo '<td align="right" style="font-size: 12">'.number_format($m['LTS'], 2).'</td>';
+        echo '<td align="right" style="font-size: 12">'.number_format($m['PRECIO_PROD_MOV'],2).'</td>';
+        echo '<td align="right" style="font-size: 12">'.number_format($m['CONSUMO'],2).'</td>';
         echo '<td>'.$m['REFERENCIA'].'</td>';
         echo '<td>'.$m['VALE_NOTA'].'</td>';
         echo '</tr>';
@@ -38,9 +38,15 @@
         <td></td>
         <td></td>
         <td></td>
-        <td class='sumatoria gris' ><?php echo number_format($litros_sum, 2 ); ?></td>
+        <td class='sumatoria gris' bgcolor="#d3d3d3" align="right" style="font-size: 12">
+            <b><?php echo number_format($litros_sum, 2 ); ?></b>
+        </td>
         <td></td>
-        <td class='sumatoria' id="saldo_sin_facturar">$ <?php echo number_format($consumo_sum, 2  ); ?></td>
+        <td class='sumatoria' id="saldo_sin_facturar" bgcolor="#d3d3d3" align="right" style="font-size: 12">
+            <b>$ <?php echo number_format($consumo_sum, 2  ); ?></b>
+        </td>
+        <td></td>
+        <td></td>
     </tr>
 
 

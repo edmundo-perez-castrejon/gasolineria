@@ -1,4 +1,4 @@
-<h3><?php echo $cliente[0]['CLAVE_CLIENTE'].' '.$cliente[0]['RAZON_SOCIAL'] ?></h3>
+<h3><?php echo $cliente[0]['CLAVE_CLIENTE'].' '.utf8_decode($cliente[0]['RAZON_SOCIAL']) ?></h3>
 <table class="table">
     <tr>
         <td>No FACTURA</td>

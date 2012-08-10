@@ -53,11 +53,11 @@ class Reportes extends CI_Controller {
         $this->data['facturas'] = $lst_facturas;
         $this->data['movimientos'] = $lst_movimientos;
 
-        $html = '';
-        $html .= "<span id='nombre_cliente'>".$this->user->cliente->razon_social."</span><hr>";
+        $html = $this->get_encabezado('Reporte de estado general');
+        $html .= "<span id='nombre_cliente'>".$this->user->cliente->razon_social."</span>";
         $html .= $this->load->view('dashboard/movimientos_pendientes', $this->data, true);
         $html .= $this->load->view('dashboard/facturas_pendientes', $this->data, true);
-        $html .= "<h3>Gran total $ ".number_format(gran_total($lst_movimientos, $lst_facturas),2);
+        $html .= "<div align='right'><h2>Gran total $ ".number_format(gran_total($lst_movimientos, $lst_facturas),2);
 
         pdf_create($html, 'ReporteGeneral'); #pdf_create_landscape
     }
