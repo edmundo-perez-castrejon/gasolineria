@@ -181,7 +181,7 @@ class Reportes extends CI_Controller {
     public function saldo_por_cliente_PDF(){
         $cliente_id = $this->input->post('clientes');
         $gran_total = 0;
-
+        $html = $this->get_encabezado('Facturas con saldo');
         if($cliente_id > 0){
             $facturas = $this->facturas_model->get_datos_with_balance($cliente_id, 15);
             $data['facturas'] = $facturas;
@@ -191,10 +191,9 @@ class Reportes extends CI_Controller {
                 $saldo_cliente += $f['SALDO'];
             }
             $gran_total += $saldo_cliente;
-            $html = $this->load->view('reportes/saldo_por_cliente_rpt', $data, true );
+            $html .= $this->load->view('reportes/saldo_por_cliente_rpt', $data, true );
         }else{
             $lst_clientes = $this->clientes_model->get_datos('CLAVE_CLIENTE');
-            $html = '';
             foreach($lst_clientes as $c){
                 $cliente_id = $c['CLAVE_CLIENTE'];
                 $facturas = $this->facturas_model->get_datos_with_balance($cliente_id, 15);
@@ -215,10 +214,11 @@ class Reportes extends CI_Controller {
             }
         }
 
-        $html .= "<hr>GRAN TOTAL : <h1>$ ".number_format($gran_total,2)."</h1>";
+        $html .= "<div align='right' style='font-size: 22px'>GRAN TOTAL : $ ".number_format($gran_total,2)."";
 
         $this->mpdf->WriteHTML($html,2);
         $this->mpdf->Output('mpdf.pdf','I');
+
     }
 
     public function facturas_por_vencimiento_PDF(){
