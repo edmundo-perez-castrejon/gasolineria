@@ -2,8 +2,6 @@ Teamviewer: 847 525 319 / macroaaa
 Password servidor: macroaaa
 
 ====================================
-- Cuadricula para Facturas con Saldo
-- Cuadricula para Facturas con vencimiento
 - Grandes totales en matriz de vencimientos
 - Usuario tipo administrador que solo permita reportear
 - Menos margen en el encabezado de los PDF
@@ -28,8 +26,11 @@ CREDITO DISPONIBLE
 POR FACTURAR (IMPORTE DE MOVIMIENTOS)
 
 - Reporte dashboard con cuadricula y fecha
+- Cuadricula para Facturas con Saldo
+- Cuadricula para Facturas con vencimiento
 ____________________________
 - CAMBIO DE LETRA Y ACOMODO DE LAS COLUMNAS (ARIAL 10)
 SUBTOTALES EN NEGRITA Y LETRA MAS GRANDE
 GRAN TOTAL A LA DERECHA
 TITULOS EN NEGRITA
+

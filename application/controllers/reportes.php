@@ -225,6 +225,8 @@ class Reportes extends CI_Controller {
         $cliente_id = $this->input->post('clientes');
         $gran_total = 0;
 
+        $html = $this->get_encabezado('Facturas con vencimiento');
+
         if($cliente_id > 0){
             $cliente = $this->clientes_model->get_datos_access($cliente_id);
             $data['cliente'] = $cliente;
@@ -235,7 +237,7 @@ class Reportes extends CI_Controller {
                 $saldo_cliente += $f['SALDO'];
             }
             $gran_total += $saldo_cliente;
-            $html = $this->load->view('reportes/facturas_por_vencimiento_rpt', $data, true );
+            $html .= $this->load->view('reportes/facturas_por_vencimiento_rpt', $data, true );
         }else{
             $lst_clientes = $this->clientes_model->get_datos('CLAVE_CLIENTE, PLAZO');
             $html = '';
@@ -260,7 +262,7 @@ class Reportes extends CI_Controller {
             }
         }
 
-        $html .= "<hr>GRAN TOTAL : <h1>$ ".number_format($gran_total,2)."</h1>";
+        $html .= "<div align='right' style='font-size: 22px'>GRAN TOTAL : $ ".number_format($gran_total,2);
 
         $this->mpdf->WriteHTML($html,2);
         $this->mpdf->Output('facturas_por_vencimiento.pdf','I');
