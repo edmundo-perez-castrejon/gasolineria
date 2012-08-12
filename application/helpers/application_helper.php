@@ -2,13 +2,20 @@
 
 function gran_total($movimientos, $facturas)
 {
+    $consumo_sum = $consumo_sum($movimientos);
+    $saldo_sum = facturado_sum($facturas);
+    return $consumo_sum + $saldo_sum;
+}
+
+function consumo_sum($movimientos){
     $consumo_sum = 0;
     foreach($movimientos as $m){          $consumo_sum += $m['CONSUMO'];    }
-
+    return $consumo_sum;
+}
+function facturado_sum($facturas){
     $saldo_sum = 0;
     foreach($facturas as $f){        $saldo_sum += $f['SALDO'];    }
-
-    return $consumo_sum + $saldo_sum;
+    return $saldo_sum;
 }
 
 function date_mdy($dmy)

@@ -183,7 +183,7 @@ class Reportes extends CI_Controller {
         $gran_total = 0;
         $html = $this->get_encabezado('Facturas con saldo');
         if($cliente_id > 0){
-            $facturas = $this->facturas_model->get_datos_with_balance($cliente_id, 15);
+            $facturas = $this->facturas_model->get_datos_with_balance($cliente_id);
             $data['facturas'] = $facturas;
             $data['cliente'] = $this->clientes_model->get_datos_access($cliente_id);
             $saldo_cliente = 0;
@@ -196,7 +196,7 @@ class Reportes extends CI_Controller {
             $lst_clientes = $this->clientes_model->get_datos('CLAVE_CLIENTE');
             foreach($lst_clientes as $c){
                 $cliente_id = $c['CLAVE_CLIENTE'];
-                $facturas = $this->facturas_model->get_datos_with_balance($cliente_id, 15);
+                $facturas = $this->facturas_model->get_datos_with_balance($cliente_id);
 
                 if(count($facturas)>0){
                     $data['facturas'] = $facturas;
@@ -230,7 +230,7 @@ class Reportes extends CI_Controller {
         if($cliente_id > 0){
             $cliente = $this->clientes_model->get_datos_access($cliente_id);
             $data['cliente'] = $cliente;
-            $facturas = $this->facturas_model->get_datos_with_balance($cliente_id, $cliente[0]['PLAZO']);
+            $facturas = $this->facturas_model->get_datos_with_balance($cliente_id);
             $data['facturas'] = $facturas;
             $saldo_cliente = 0;
             foreach($facturas as $f){
@@ -245,7 +245,7 @@ class Reportes extends CI_Controller {
                 $cliente_id = $c['CLAVE_CLIENTE'];
                 $cliente = $this->clientes_model->get_datos_access($cliente_id);
                 $data['cliente'] = $cliente;
-                $facturas = $this->facturas_model->get_datos_with_balance($cliente_id, $cliente[0]['PLAZO']);
+                $facturas = $this->facturas_model->get_datos_with_balance($cliente_id);
 
                 if(count($facturas)>0){
                     $data['facturas'] = $facturas;
@@ -277,30 +277,54 @@ class Reportes extends CI_Controller {
         }
 
         $html = $this->get_encabezado('Matriz de facturas con vencimento');
+        $importe_no_facturado_gran_total = 0;
+        $importe_facturado_gran_total = 0;
         if($cliente_id > 0){
-            $html .= $this->matriz_vencimientos_html($cliente_id);
+
+            $importe_no_facturado = $this->movimientos_model->importe_no_facturado($cliente_id);
+            $extra['importe_no_facturado'] = $importe_no_facturado;
+            $importe_no_facturado_gran_total += $importe_no_facturado;
+
+            $facturas = $this->facturas_model->get_datos_with_balance($cliente_id);
+            $importe_facturado_gran_total += facturado_sum($facturas);
+            $html .= $this->matriz_vencimientos_html($cliente_id, $facturas, $extra);
         }else{
             $lst_clientes = $this->clientes_model->get_datos_order_deuda('CLAVE_CLIENTE, PLAZO');
             $html = '';
             foreach($lst_clientes as $c){
                 $cliente_id = $c['CLAVE_CLIENTE'];
-                $html .= $this->matriz_vencimientos_html($cliente_id);
+                $importe_no_facturado = $this->movimientos_model->importe_no_facturado($cliente_id);
+                $extra['importe_no_facturado'] = $importe_no_facturado;
+                $importe_no_facturado_gran_total += $importe_no_facturado;
+
+                $facturas = $this->facturas_model->get_datos_with_balance($cliente_id);
+                $importe_facturado_gran_total += facturado_sum($facturas);
+
+                $html .= $this->matriz_vencimientos_html($cliente_id, $facturas, $extra);
             }
         }
 
+        $html .= "<div align=right style='font-size: 22px'>TOTAL IMPORTE NO FACTURADO: $".
+                        number_format($importe_no_facturado_gran_total, 2).
+                    '</div>';
+        $html .= "<div align=right style='font-size: 22px'>TOTAL IMPORTE FACTURADO: $".
+                        number_format($importe_facturado_gran_total, 2).
+                        '</div>';
+        $html .= "<br/>";
+        $html .= "<div align=right style='font-size: 25px'>G R A N  T O T A L: $".
+            number_format($importe_facturado_gran_total + $importe_no_facturado_gran_total, 2).
+            '</div>';
         $this->mpdf->WriteHTML($html,2);
         $this->mpdf->Output('facturas_por_vencimiento.pdf','I');
     }
 
-    private function matriz_vencimientos_html($cliente_id, $data_extra = null)
+    private function matriz_vencimientos_html($cliente_id, $lst_facturas, $data_extra = null)
     {
         $cliente = $this->clientes_model->get_datos_access($cliente_id);
         $data['cliente'] = $cliente;
-        $facturas = $this->facturas_model->get_datos_with_balance($cliente_id, $cliente[0]['PLAZO']);
-        $new_facturas = $this->matriz_facturas($facturas);
+        $new_facturas = $this->matriz_facturas($lst_facturas);
         $data['facturas'] = $new_facturas;
-        $nofacturado = $this->movimientos_model->importe_no_facturado($cliente_id);
-        $data['movimientos_sum'] = $nofacturado[0]['SUM_CONSUMO'];
+        $data['movimientos_sum'] = $data_extra['importe_no_facturado'];
 
         $ultimo_consumo = $this->movimientos_model->get_ultimo_consumo($cliente_id);
         $data['ultimo_consumo'] = $ultimo_consumo;
@@ -308,7 +332,7 @@ class Reportes extends CI_Controller {
         $data['ultimo_abono'] = $ultimo_abono;
 
         $data['extra'] = $data_extra;
-        if(count($facturas) > 0 or $nofacturado[0]['SUM_CONSUMO'] > 0 ){
+        if(count($facturas) > 0 or $data_extra['importe_no_facturado'] > 0 ){
             $html = $this->load->view('reportes/matriz_vencimiento_rpt', $data, true );
         }
 

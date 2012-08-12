@@ -204,7 +204,8 @@ Class Movimientos_model extends CI_Model
         $rs = $this->db_connection->execute("SELECT SUM(CONSUMO) AS SUM_CONSUMO FROM MOVIMIENTOS
                                               WHERE CLAVE_CLIENTE_MOV = $client_id
                                               AND FACTURADO = 0 AND ABONO = 0");
-        return make_array_result($rs);
+        $a_tmp = make_array_result($rs);
+        return $a_tmp[0]['SUM_CONSUMO'];
     }
 
     public function get_ultimo_consumo($client_id){

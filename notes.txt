@@ -2,10 +2,9 @@ Teamviewer: 847 525 319 / macroaaa
 Password servidor: macroaaa
 
 ====================================
-- Grandes totales en matriz de vencimientos
+- Reporte de usuarios con razon social, nombre de usuario y contraseña
 - Usuario tipo administrador que solo permita reportear
 - Menos margen en el encabezado de los PDF
-- Reporte de usuarios con razon social, nombre de usuario y contraseña
 - Paginado en los reportes principales
 ===================================================================================================================
 
@@ -28,6 +27,7 @@ POR FACTURAR (IMPORTE DE MOVIMIENTOS)
 - Reporte dashboard con cuadricula y fecha
 - Cuadricula para Facturas con Saldo
 - Cuadricula para Facturas con vencimiento
+- Grandes totales en matriz de vencimientos
 ____________________________
 - CAMBIO DE LETRA Y ACOMODO DE LAS COLUMNAS (ARIAL 10)
 SUBTOTALES EN NEGRITA Y LETRA MAS GRANDE
