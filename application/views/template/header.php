@@ -196,6 +196,8 @@
                                 <li class="divider"></li>
                                 <li><?php echo anchor('reportes/saldo_por_cliente','Facturas con saldo'); ?></li>
                                 <li><?php echo anchor('reportes/facturas_por_vencimiento','Facturas por vencimiento'); ?></li>
+                                <li class="divider"></li>
+                                <li><?php echo anchor('reportes/clientes','Clientes con contraseña'); ?></li>
                             </ul>
                         </div>
                         <?php

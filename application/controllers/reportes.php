@@ -386,4 +386,16 @@ class Reportes extends CI_Controller {
         return $html;
     }
 
+    public function clientes()
+    {
+        $users = new User();
+        $users->where('cliente_id >0')->get();
+
+        $html = $this->get_encabezado('Reporte de clientes');
+        $data['users'] = $users;
+        $html .= $this->load->view('reportes/clientes',$data, true);
+
+        pdf_create($html, 'reporte_clientes');
+    }
+
 }
