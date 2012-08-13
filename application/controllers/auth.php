@@ -36,7 +36,7 @@ class Auth extends CI_Controller {
             $u = new User($this->session->userdata('user_id'));
             $this->session->set_userdata('user_type', $u->user_type);
 
-            if($u->user_type == 1){
+            if($u->user_type == 2){
                 redirect('admin/grocery_usuarios');
             }else{
                 redirect('reportes/matriz_vencimientos');
