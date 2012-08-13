@@ -2,7 +2,7 @@
 
 function gran_total($movimientos, $facturas)
 {
-    $consumo_sum = $consumo_sum($movimientos);
+    $consumo_sum = consumo_sum($movimientos);
     $saldo_sum = facturado_sum($facturas);
     return $consumo_sum + $saldo_sum;
 }
