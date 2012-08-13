@@ -32,7 +32,15 @@ class Auth extends CI_Controller {
 		{
 			//set the flash data error message if there is one
 			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-            redirect('admin/grocery_usuarios');
+
+            $u = new User($this->session->userdata('user_id'));
+            $this->session->set_userdata('user_type', $u->user_type);
+
+            if($u->user_type == 1){
+                redirect('admin/grocery_usuarios');
+            }else{
+                redirect('reportes/matriz_vencimientos');
+            }
 		}
 	}
 

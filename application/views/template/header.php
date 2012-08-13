@@ -169,10 +169,8 @@
             <ul class="nav">
                 <li>
                     <?php
-                    if($this->ion_auth->is_admin()){
+                    if($this->ion_auth->is_admin() and $this->session->userdata('user_type')==2){
                         echo anchor('admin/grocery_usuarios','Usuarios');
-                    }else{
-                      //  echo anchor('contratos','Contratos');
                     }
                     ?>
                 </li>
@@ -182,7 +180,10 @@
                         ?>
 
                         <li>
-                            <?php echo anchor('admin/configuracion','Configuracion'); ?>
+                            <?php if ($this->session->userdata('user_type') == 2){
+                                 echo anchor('admin/configuracion','Configuracion');
+                            }
+                            ?>
                         </li>
                         <div class="btn-group pull-right">
                             <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">

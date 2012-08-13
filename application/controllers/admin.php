@@ -11,6 +11,7 @@ class Admin extends CI_Controller {
         $this->load->library('ion_auth');
         $this->load->library('grocery_CRUD');
 
+
         if (!$this->ion_auth->logged_in())
         {
             //redirect them to the login page
@@ -18,6 +19,7 @@ class Admin extends CI_Controller {
         }else{
             $this->load->library('session');
             $this->load->helper(array('url','form'));
+            $this->load->model('clientes_model');
         }
     }
 
@@ -32,22 +34,39 @@ class Admin extends CI_Controller {
 
         #Relacion con la clientes
         $crud->set_relation('cliente_id','clientes','razon_social');
+        $crud->set_relation('user_type','user_types','description');
 
-        $crud->columns('username','active','cliente_id');
+        $crud->columns('username','active','cliente_id', 'user_type');
 
-        $crud->fields('username','password','email','active','cliente_id');
+        $crud->fields('username','password','email','active','cliente_id','user_type');
+
+        $crud->set_rules('username','Usuario','required');
+        $crud->set_rules('password','contraseña','required');
+        $crud->set_rules('active','Activo','required');
+        $crud->set_rules('user_type','Tipo de usuario','required');
 
         $crud->change_field_type('password','password');
 
         $crud->display_as('username','Usuario')
             ->display_as('email','Correo Electronico')
-            ->display_as('cliente_id','Razon Social');
+            ->display_as('cliente_id','Razon Social')
+            ->display_as('user_type','Tipo de usuario');
 
+        $crud->callback_after_insert(array($this, 'make_admin'));
 
         $output = $crud->render();
         $this->load->view('template/header',$output);
         $this->load->view('admin/listado_usuarios',$output);
         $this->load->view('template/footer');
+    }
+
+    public function make_admin($post_array, $primary_key){
+
+
+        $user_tmp = new User($primary_key);
+        if($user_tmp->user_type == 2 or $user_tmp->user_type == 3){
+    		$this->clientes_model->make_admin($primary_key);
+        }
     }
 
     public function configuracion()
@@ -72,7 +91,7 @@ class Admin extends CI_Controller {
 
     public function clientes()
     {
-        $this->load->model('clientes_model');
+
 
         $crud = new grocery_CRUD();
 
