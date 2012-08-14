@@ -1,4 +1,4 @@
 .idea/*
 images/*
 images/front/*
-application/helpers/dompdf/lib/fonts/log.htm
+application/helpers/dompdf/*
