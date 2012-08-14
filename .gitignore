@@ -1,1 +1,5 @@
 .idea/*
+images/*
+images/front/*
+application/helpers/dompdf/*
+application/helpers/dompdf/lib/fonts/*
