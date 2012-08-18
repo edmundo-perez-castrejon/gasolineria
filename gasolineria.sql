@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 09-08-2012 a las 01:16:25
+-- Tiempo de generación: 18-08-2012 a las 17:09:59
 -- Versión del servidor: 5.5.8
 -- Versión de PHP: 5.3.5
 
@@ -419,7 +419,7 @@ CREATE TABLE IF NOT EXISTS `configuracion` (
 --
 
 INSERT INTO `configuracion` (`id`, `imagen_frontal`, `nombre_empresa`) VALUES
-(2, '5c6e3-pemex.jpg', 'MACROSERVICIOS DEL PACIFICO S.A. DE C.V.');
+(2, '35df3-macroservicio.jpg', 'MACROSERVICIOS DEL PACIFICO S.A. DE C.V.');
 
 -- --------------------------------------------------------
 
@@ -468,17 +468,20 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id_empresa` int(11) NOT NULL,
   `superusuario` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `cliente_id` int(11) DEFAULT NULL,
+  `user_type` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `IX_USERNAME` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Volcar la base de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`, `id_empresa`, `superusuario`, `cliente_id`) VALUES
-(17, 2130706433, 'root', 'toor', NULL, 'ing.edmundo@gmail.com', NULL, NULL, NULL, 1268889823, 1344177194, 1, NULL, NULL, NULL, NULL, 0, 1, NULL),
-(18, 0, 'edmundo', 'mundo', NULL, 'ing.edmundo@gmail.com', NULL, NULL, NULL, 0, 1344177456, 1, 'Edmundo', 'Perez Castrejon', NULL, NULL, 0, 1, 3114);
+INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`, `id_empresa`, `superusuario`, `cliente_id`, `user_type`) VALUES
+(17, 2130706433, 'root', 'toor', NULL, 'ing.edmundo@gmail.com', NULL, NULL, NULL, 1268889823, 1344907953, 1, NULL, NULL, NULL, NULL, 0, 1, NULL, 2),
+(18, 0, 'edmundo', 'mundo', NULL, 'ing.edmundo@gmail.com', NULL, NULL, NULL, 0, 1344910049, 1, 'Edmundo', 'Perez Castrejon', NULL, NULL, 0, 1, 3326, 1),
+(19, 0, 'jacobo', 'arias1960', NULL, '', NULL, NULL, NULL, 0, 1344891493, 1, NULL, NULL, NULL, NULL, 0, 1, NULL, 2),
+(20, 0, 'macro6629', 'ardica32615', NULL, '', NULL, NULL, NULL, 0, 1344894638, 1, NULL, NULL, NULL, NULL, 0, 1, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -491,7 +494,7 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
   `user_id` mediumint(8) unsigned NOT NULL,
   `group_id` mediumint(8) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Volcar la base de datos para la tabla `users_groups`
@@ -503,4 +506,29 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (3, 2, 2),
 (4, 3, 2),
 (5, 17, 1),
-(6, 17, 2);
+(6, 17, 2),
+(7, 19, 1),
+(8, 19, 2),
+(9, 20, 1),
+(10, 20, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `user_types`
+--
+
+CREATE TABLE IF NOT EXISTS `user_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(254) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Volcar la base de datos para la tabla `user_types`
+--
+
+INSERT INTO `user_types` (`id`, `description`) VALUES
+(1, 'normal'),
+(2, 'administrador'),
+(3, 'reporteador');
