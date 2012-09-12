@@ -364,12 +364,14 @@ class Reportes extends CI_Controller {
     public function sobregirados()
     {
         $lst_sobregirados = $this->clientes_model->get_lst_sobregirados();
-
         $html = $this->get_encabezado('Clientes con sobregiro');
         foreach($lst_sobregirados as $c){
-
-            $extra['estadisticas'] = $c;
-            $html .= $this->matriz_vencimientos_html($c['CLAVE_CLIENTE'], $extra);
+        	$extra['estadisticas'] = $c;
+        	$cliente_id = $c['CLAVE_CLIENTE'];
+            $importe_no_facturado = $this->movimientos_model->importe_no_facturado($cliente_id);
+            $extra['importe_no_facturado'] = $importe_no_facturado;
+            $facturas = $this->facturas_model->get_datos_with_balance($cliente_id);
+            $html .= $this->matriz_vencimientos_html($cliente_id, $facturas, $extra);
         }
 
         $this->mpdf->WriteHTML($html,2);
