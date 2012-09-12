@@ -271,6 +271,7 @@ class Reportes extends CI_Controller {
     public function matriz_vencimientos_PDF(){
 
         $cliente_id = $this->input->post('clientes');
+        $order = $this->input->post('radioorden');
 
         if(!$this->ion_auth->is_admin()){
             $cliente_id =$this->user->cliente->clave_cliente;
@@ -289,7 +290,12 @@ class Reportes extends CI_Controller {
             $importe_facturado_gran_total += facturado_sum($facturas);
             $html .= $this->matriz_vencimientos_html($cliente_id, $facturas, $extra);
         }else{
-            $lst_clientes = $this->clientes_model->get_datos_order_deuda('CLAVE_CLIENTE, PLAZO');
+            if($order=='deuda'){
+                $lst_clientes = $this->clientes_model->get_datos_order_deuda('CLAVE_CLIENTE, PLAZO');    
+            }else{
+                $lst_clientes = $this->clientes_model->get_datos_order_nombre('CLAVE_CLIENTE, PLAZO');    
+            }
+            
             $html = '';
             foreach($lst_clientes as $c){
                 $cliente_id = $c['CLAVE_CLIENTE'];
